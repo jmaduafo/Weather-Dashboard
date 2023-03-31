@@ -158,7 +158,7 @@ function changeTimeZone(date, timeZone) {
     
 }
 
-var apiKey = "fc1cecfce950939c0c23f9e6811123bf";
+var apiKey = config.WEATHER_API_TOKEN;
 
 var currentLocationUrl = "https://ipapi.co/json/";
 
