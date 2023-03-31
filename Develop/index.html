@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Anton&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500;1,6..96,600&family=Cinzel:wght@400;500;600;700&family=Elsie:wght@400;900&family=Fahkwang:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600&family=Inter:wght@300;500;700&family=Italiana&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,300;1,400&family=Marcellus&family=Oranienbaum&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300&family=Sofia+Sans+Semi+Condensed:wght@200&family=Sofia+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,900&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles.css">
+    <title>Weather Pop</title>
+</head>
+<body>
+    <main>
+        <div class="dashboard-container">
+            <section>
+                <div class="search-with-time">
+                    <div class="current-time">
+                        <p><span id="current-time">0:00</span><span id="am-pm">AM</span></p>
+                    </div>
+                    <div class="greeting">
+                        <h5>Good <span id="time-of-day">afternoon</span>, <span id="user-name">Stranger</span></h5>
+                        <img id="time-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABXElEQVR4nO2WQU7DMBBFXRasm224CWJLF6Rch7ZrKgqHKpUSOAFnKAegbLp6aMggucZR7WADizwpUjszyXw7MxMbMxAB8Aw05q9AyZ3kBJgChcfXALXHXgCV3JtCwFQX+gKMA+ILjRWqFAIK64GXAfGTGMGhIsaSHBjp/2tgA7zr9Sg7pb6RxqZJ7gLc0c3S5IR25cIeuAFKvWZq42sncgnYaJKZxzdX3zrlkMEeNMDu0wKlJ152QnizbKfAA/AaPbBoexy7z48IOPMIuFfbwXN6Q1vtwtzjW7ivANiq7fzHyZ2htNd3XurKF1YRVh4BFyYVwJJubp3YFWE0IYNoYg0i2Ym11sROf38bu1qEK2snuqiTjeLkEPkxyvU5vvIl9x1InN4Ppd+hBsWx2b0fSr8ZATy5Nyfv/Viy9H4MTu///oGVw96vAwszr1COF2adW8B2KEz+W2EOmA4+AIIYfW0sxx8BAAAAAElFTkSuQmCC" alt="time of day icon">
+                    </div>
+                    <div class="color-selectors">
+                        <div class="selector mint-btn"></div>
+                        <div class="selector mulberry-btn"></div>
+                        <div class="selector bubblegum-btn"></div>
+                    </div>
+                    <div class="search-input">
+                        <input type="text" id="city-name" placeholder="Enter city name">
+                        <div class="search-btn" id="search">
+                            <i class='bx bx-search-alt-2'></i>
+                        </div>
+                    </div>
+                    <div class="search-container" id="search-container">
+                        
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="main-dashboard">
+                    <!-- TODAY WEATHER -->
+                    <div class="today-weather">
+                        <div class="major-left-weather">
+                            <div class="top-half">
+                                <div class="overall-temp">
+                                    <div class="current-degrees">
+                                        <p><span id="current-temp">--</span>°</p>
+                                    </div>
+                                    <div class="city-and-weather">
+                                        <p id="city">---</p>
+                                        <i class='bx bxs-cloud bx-sm' ></i>
+                                    </div>
+                                    <div class="current-weather">
+                                        <p id="climate">--</p>
+                                    </div>
+                                </div>
+                                <div class="today-date">
+                                    <h5 id="current-date">---</h5>
+                                </div>
+                            </div>
+                            <div class="bottom-half-absolute">
+                                <div class="bottom-half">
+                                    <div class="min-max">
+                                        <div class="min-temp">
+                                            <h5>Min Temp</h5>
+                                            <p><span id="min">--</span>°</p>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="max-temp">
+                                            <h5>Max Temp</h5>
+                                            <p><span id="max">--</span>°</p>
+                                        </div>
+                                    </div>
+                                    <div class="sunrise-sunset">
+                                        <div class="sunrise">
+                                            <h5>Sunrise</h5>
+                                            <p><span id="sunrise">---</span>AM</p>
+                                        </div>
+                                        <div class="sunset">
+                                            <h5>Sunset</h5>
+                                            <p><span id="sunset">---</span>PM</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="minor-right-weather">
+                            <div class="feels-like">
+                                <div class="right-title feels-like-title">
+                                    <i class='bx bxs-sun' ></i>
+                                    <h5>Feels Like</h5>
+                                </div>
+                                <div class="right-entry feels-like-entry">
+                                    <h3><span id="feels-like-degrees">--</span>°</h3>
+                                </div>
+                            </div>
+                            <div class="humidity">
+                                <div class="right-title humidity-title">
+                                    <i class='bx bxs-droplet'></i>
+                                    <h5>Humidity</h5>
+                                </div>
+                                <div class="right-entry humidity-entry">
+                                    <h3><span id="humidity-percent">--</span>%</h3>
+                                </div>
+                            </div>
+                            <div class="wind-speed">
+                                <div class="right-title wind-speed-title">
+                                    <i class='bx bx-wind' ></i>
+                                    <h5>Wind Speed</h5>
+                                </div>
+                                <div class="right-entry wind-speed-entry">
+                                    <h3><span id="speed-miles">--</span> mph</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FIVE DAY FORECAST -->
+                    <div class="five-day-weather">
+                        <div class="five-weather-title">
+                            <i class='bx bx-calendar-alt'></i>
+                            <h5>5-Day Forecast</h3>
+                        </div>
+                        <div class="week-weather" >
+                            <div class="week-slide" id="week-slide">
+
+                            
+                            <div class="five-day">
+                               <p>Saturday</p>
+                               <i class='bx bx-cloud-drizzle bx-sm'></i>
+                               <div class="five-day-max-min">
+                                    <p><span>45</span>°</p>
+                                    <div class="divider"></div>
+                                    <p><span>52</span>°</p>
+                               </div>
+                               <div class="five-humidity-wind-speed">
+                                    <div class="five-humidity">
+                                        <h5>Humidity</h5>
+                                        <p>65%</p>
+                                    </div>
+                                    <div class="five-wind-speed">
+                                        <h5>Wind Speed</h5>
+                                        <p>1.6 mi</p>
+                                    </div>
+                               </div>
+                            </div>
+                            <div class="five-day">
+                                <p>Saturday</p>
+                               <i class='bx bx-cloud-drizzle bx-sm'></i>
+                               <div class="five-day-max-min">
+                                    <p><span>45</span>°</p>
+                                    <div class="divider"></div>
+                                    <p><span>52</span>°</p>
+                               </div>
+                               <div class="five-humidity-wind-speed">
+                                    <div class="five-humidity">
+                                        <h5>Humidity</h5>
+                                        <p>65%</p>
+                                    </div>
+                                    <div class="five-wind-speed">
+                                        <h5>Wind Speed</h5>
+                                        <p>1.6 mi</p>
+                                    </div>
+                               </div>
+                            </div>
+                            <div class="five-day">
+                                <p>Saturday</p>
+                               <i class='bx bx-cloud-drizzle bx-sm'></i>
+                               <div class="five-day-max-min">
+                                    <p><span>45</span>°</p>
+                                    <div class="divider"></div>
+                                    <p><span>52</span>°</p>
+                               </div>
+                               <div class="five-humidity-wind-speed">
+                                    <div class="five-humidity">
+                                        <h5>Humidity</h5>
+                                        <p>65%</p>
+                                    </div>
+                                    <div class="five-wind-speed">
+                                        <h5>Wind Speed</h5>
+                                        <p>1.6 mi</p>
+                                    </div>
+                               </div>
+                            </div>
+                            <div class="five-day">
+                                <p>Saturday</p>
+                               <i class='bx bx-cloud-drizzle bx-sm'></i>
+                               <div class="five-day-max-min">
+                                    <p><span>45</span>°</p>
+                                    <div class="divider"></div>
+                                    <p><span>52</span>°</p>
+                               </div>
+                               <div class="five-humidity-wind-speed">
+                                    <div class="five-humidity">
+                                        <h5>Humidity</h5>
+                                        <p>65%</p>
+                                    </div>
+                                    <div class="five-wind-speed">
+                                        <h5>Wind Speed</h5>
+                                        <p>1.6 mi</p>
+                                    </div>
+                               </div>
+                            </div>
+                            <div class="five-day">
+                                <p>Saturday</p>
+                               <i class='bx bx-cloud-drizzle bx-sm'></i>
+                               <div class="five-day-max-min">
+                                    <p><span>45</span>°</p>
+                                    <div class="divider"></div>
+                                    <p><span>52</span>°</p>
+                               </div>
+                               <div class="five-humidity-wind-speed">
+                                    <div class="five-humidity">
+                                        <h5>Humidity</h5>
+                                        <p>65%</p>
+                                    </div>
+                                    <div class="five-wind-speed">
+                                        <h5>Wind Speed</h5>
+                                        <p>1.6 mi</p>
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="forecast-buttons">
+                            <div class="btn left-btn" id="previous">
+                                <i class='bx bx-chevron-left bx-sm' ></i>
+                            </div>
+                            <div class="btn right-btn" id="next">
+                                <i class='bx bx-chevron-right bx-sm' ></i>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="./assets/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,428 @@
+:root {
+    --bubblegum: #FE6262;
+    --mulberry: #8C3B3B;
+    --mint: #D2EEE7;
+    --mint-background: #E8FFFE;
+    --mint-text: #7BADA1;
+    --mint-icon: #416F64;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, p {
+    color: var(--mint-text);
+}
+
+h5 {
+    text-transform: uppercase;
+    font-weight: 200;
+    color: var(--mint-text);
+    font-size: 12px;
+    opacity: .7;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: row;
+    padding: 50px 100px;
+    background-color: #ADD9CE;
+    width: 100%;
+    height: 100svh;
+
+}
+
+/* ---------SIDE BAR WITH SEARCH AND TIME------------ */
+
+.main-dashboard {
+    margin-left: 5em;
+}
+
+.current-time p {
+    font-size: 32px;
+    font-weight: 300;
+    color: white;
+}
+
+#current-time {
+    font-size: 90px;
+    font-weight: 600;
+}
+
+.greeting {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.greeting h5 {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 200;
+    color: white;
+}
+
+.greeting img {
+    width: 17px;
+    margin-left: 5px;
+}
+
+.color-selectors {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.selector {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 0 8px;
+}
+
+.mint-btn {
+    background-color: var(--mint); 
+}
+.mulberry-btn {
+    background-color: var(--mulberry); 
+}
+.bubblegum-btn {
+    background-color: var(--bubblegum); 
+}
+
+.selector:hover {
+    cursor: pointer;
+}
+
+.search-input {
+    position: relative;
+}
+
+.search-input input {
+    font-family: "Inter", sans-serif;
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    background-color: var(--mint-background);
+    font-weight: 200;
+    letter-spacing: -1px;
+    color: var(--mint-text);
+}
+
+::placeholder {
+    color: var(--mint-text);
+    opacity: .7;
+}
+
+::-moz-placeholder {
+    color: var(--mint-text);
+    opacity: .7;
+}
+
+.search-btn {
+    position: absolute;
+    transform: translate(215px,-28.5px);
+    background-color: var(--mint-text);
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.search-btn i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.search-btn:hover {
+    cursor: pointer;
+}
+
+.search-container {
+    width: 100%;
+    height: 31em;
+    background-color: var(--mint-background);
+    border-radius: 20px;
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 5px;
+    overflow-y: hidden;
+}
+
+.search-option {
+    font-weight: 300;
+    text-align: center;
+    height: 35px;
+    padding: 8px;
+    border-bottom: 1px solid var(--mint-text);
+    width: 80%;
+
+}
+
+/* ----------TOP RIGHT DASHBOARD WITH TODAY WEATHER----------- */
+
+.today-weather {
+    display: flex;
+    justify-content: left;
+    margin: 15px 0;
+    gap: 40px;
+    
+}
+
+/* ---------------TODAY LEFT SECTION------------------- */
+.major-left-weather {
+    width: 50em;
+    border-radius: 20px;
+    padding: 20px 40px;
+    background-color: var(--mint-background);
+    position: relative;
+    transition: all .4s ease;
+}
+.bottom-half-absolute {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0 40px;
+}
+
+.top-half, .bottom-half {
+    display: flex;
+    justify-content: space-between;
+}
+
+.today-date h5 {
+    font-size: 15px;
+    text-transform: capitalize;
+    opacity: 1;
+}
+
+.current-degrees p {
+    font-size: 80px;
+}
+
+.min-max {
+    display: flex;
+    margin-top: 40px;
+}
+
+.divider {
+    width: 1px;
+    height: 2em;
+    margin: 0 8px;
+    background-color: var(--mint-text);
+    opacity: .9;
+    margin-top: 5px;
+}
+
+.min-max p {
+    text-align: center;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.sunrise-sunset {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.sunrise-sunset p {
+    font-weight: 300;
+}
+
+.sunrise-sunset h5 {
+    text-align: center;
+}
+
+.sunrise {
+    margin-bottom: 10px;
+}
+
+.minor-right-weather {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.city-and-weather {
+    display: flex;
+    align-items: center;
+}
+
+.city-and-weather p {
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+.city-and-weather i {
+    color: var(--mint-icon);
+}
+
+.current-weather {
+    display: flex;
+}
+
+.current-weather p {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+#climate {
+    text-transform: capitalize;
+    margin-top: 5px;
+}
+
+/* ---------------TODAY RIGHT SECTION------------------- */
+
+.feels-like, .humidity, .wind-speed {
+    background-color: var(--mint-background);
+    border-radius: 20px;
+    padding: 20px;
+    height: 6em;
+}
+
+.right-title {
+    display: flex;
+    justify-content: center;
+}
+
+.right-title h5 {
+    margin-left: 6px;
+}
+
+.right-title i {
+    color: var(--mint-text);
+}
+
+.right-entry {
+    text-align: center;
+}
+
+.right-entry h3 {
+    font-size: 28px;
+    font-weight: 300;
+    margin-top: 10px; 
+}
+
+.wind-speed-entry h3 {
+    font-size: 24px;
+}
+
+/* ----------BOTTOM RIGHT DASHBOARD WITH 5-DAY WEATHER----------- */
+.five-weather-title {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 5px;
+}
+
+.five-weather-title h5, .five-weather-title i {
+    color: var(--mint-icon);
+}
+
+.five-weather-title h5 {
+    margin-left: 5px;
+}
+
+.week-weather {
+    width: 77%;
+    overflow-x: hidden;
+}
+
+.week-slide {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 40px;
+}
+
+.five-day {
+    background-color: var(--mint-background);
+    padding: 30px;
+    text-align: center;
+    border-radius: 20px;
+    font-weight: 300;
+}
+
+.five-day-max-min, .five-humidity-wind-speed {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.five-day-max-min {
+    margin: 10px 0 40px;
+}
+
+
+.five-day-max-min .divider {
+    height: 20px;
+}
+
+.five-day p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.five-day i {
+    color: var(--mint-icon);
+}
+
+.five-day-max-min p {
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.five-humidity-wind-speed {
+    width: 10rem;
+    gap: 20px;
+}
+
+.five-humidity-wind-speed p {
+    margin-top: 5px;
+}
+
+.forecast-buttons {
+    display: flex;
+    justify-content: center;
+    width: 77%;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--mint-icon);
+    position: relative;
+}
+
+.btn i {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn:hover {
+    cursor: pointer
+}
