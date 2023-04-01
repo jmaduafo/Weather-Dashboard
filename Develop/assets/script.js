@@ -53,13 +53,13 @@ setInterval(function() {
     var hour = time.format('H');
     if (+hour >= 0 && +hour < 12) {
         timeOfDay.innerText = "MORNING";
-        timeIcon.src = "./assets/mint/morning_sm.png";
+        // timeIcon.src = "./assets/mint/morning_sm.png";
     } else if (+hour >= 12 && +hour < 17) {
         timeOfDay.innerText = "AFTERNOON";
-        timeIcon.src = "./assets/mint/afternoon.png";
+        // timeIcon.src = "./assets/mint/afternoon.png";
     } else if (+hour >= 17 && +hour <= 23) {
         timeOfDay.innerText = "EVENING";
-        timeIcon.src = "./assets/mint/evening.png";
+        // timeIcon.src = "./assets/mint/evening.png";
     }
 
     var fullDate = "";
@@ -84,10 +84,6 @@ setInterval(function() {
 }, 1000);
 
 
-var h5 = document.querySelectorAll("h5");
-var h3 = document.querySelectorAll("h3");
-var pTag = document.querySelectorAll("p");
-
 // LARGE DASHBOARD OF CURRENT WEATHER
 var cityChose = document.getElementById("city");
 var climate = document.getElementById("climate");
@@ -110,12 +106,15 @@ var weekSlide = document.querySelector(".week-slide");
 
 searchBtn.addEventListener("click", function() {
     var citySelect = cityName.value;
-    weekSlide.innerHTML = '';
 
     fetchWeather(citySelect.toLowerCase());
+    // getIcons(citySelect.toLowerCase());
         
     const para = document.createElement("p");
     const div = document.createElement("div");
+
+    para.setAttribute("id", "list-paragraph");
+    div.setAttribute("id", "search-option");
 
     if (listOfCities.length < 13) {
         listOfCities.unshift(citySelect);
@@ -123,7 +122,7 @@ searchBtn.addEventListener("click", function() {
         
         para.innerHTML = listOfCities[0];
 
-        div.setAttribute("class", "search-option");
+        div.classList.add("search-option");
         div.appendChild(para);
 
         searchContainer.appendChild(div);
@@ -138,10 +137,7 @@ searchBtn.addEventListener("click", function() {
         // div.appendChild(para);
 
         // searchContainer.appendChild(div);
-    }
-
-    console.log(listOfCities.length);
-    
+    }    
 
     
 })
@@ -179,11 +175,12 @@ currentWeather();
 // }
 
 var apiKey = config.WEATHER_API_TOKEN;
-var mulberryClicked = false;
-var mintClicked = false;
-var bubblegumClicked = false;
 
-
+var fiveWeek = document.querySelectorAll(".five-day-week");
+var minimumTemp = document.querySelectorAll(".minimum");
+var maximumTemp = document.querySelectorAll(".maximum");
+var humidPer = document.querySelectorAll(".five-humid-per");
+var windMPH = document.querySelectorAll(".five-wind-mph");
 
 
 // Fetches any weather from any city and passes values into
@@ -216,262 +213,93 @@ function fetchWeather(city) {
             fetch(fiveDayURL)
                 .then(response => response.json())
                 .then(function(five) {
+                    console.log(five);
                     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-                    var i = 1; 
+                    
+                    var i = 1;
+                    
 
-
-                    while (i < 5) {
-                        
-                        var fiveDayForecast = document.createElement("div");
-
-                        var fiveDayDate = document.createElement("p");
-
-                        var maxMin = document.createElement("div");
-                        var maxTemp = document.createElement("p");
-                        var divider = document.createElement("div");
-                        var minTemp = document.createElement("p");
-
-                        var humiditySpeed = document.createElement("div");
-                        var fiveHumidity = document.createElement("div");
-                        var humidityText = document.createElement("h5");
-                        var humidityValue = document.createElement("p");
-                        var fiveWindSpeed = document.createElement("div");
-                        var speedText = document.createElement("h5");
-                        var speedValue = document.createElement("p");
-                        
+                    while (i < 6) {
                         var date = dayjs();
-                        fiveDayForecast.setAttribute("class", "five-day");
-
-                        fiveDayDate.innerHTML = weekday[(date.day() + 7 + i) % 7];
-
-                        // Max and Min 5 Day Forecast
-                        maxMin.setAttribute("class", "five-day-max-min");
-                        minTemp.innerHTML = Math.round(five.list[i*8].main.temp_min) + "°";
-                        divider.setAttribute("class", "divider");
-                        maxTemp.innerHTML = Math.round(five.list[i*8].main.temp_max) + "°";
-
-                        maxMin.appendChild(minTemp);
-                        maxMin.appendChild(divider);
-                        maxMin.appendChild(maxTemp);
-
-                        // Humidity and wind speed 5 day forecast
-                        humiditySpeed.setAttribute("class", "five-humidity-wind-speed");
-
-                        fiveHumidity.setAttribute("class", "five-humidity");
-                        humidityText.innerHTML = "Humidity";
-                        humidityValue.innerHTML = five.list[i*8].main.humidity + "%";
-                        fiveHumidity.appendChild(humidityText);
-                        fiveHumidity.appendChild(humidityValue);
-                        humiditySpeed.appendChild(fiveHumidity);
-
-                        fiveWindSpeed.setAttribute("class", "five-wind-speed");
-                        speedText.innerHTML = "Wind Speed";
-                        speedValue.innerHTML = five.list[i*8].wind.speed.toFixed(1) + " mph";
-                        fiveWindSpeed.appendChild(speedText);
-                        fiveWindSpeed.appendChild(speedValue);
-                        humiditySpeed.appendChild(fiveWindSpeed);
-
-                        fiveDayForecast.appendChild(fiveDayDate);
-                        fiveDayForecast.appendChild(maxMin);
-                        fiveDayForecast.appendChild(humiditySpeed);
-
-                        weekSlide.appendChild(fiveDayForecast);
-                        
-                        if (localStorage.getItem("mulberry") === "true" || mulberryClicked === true) {
-                            fiveDayForecast.classList.add("mulberry-background");
-                            fiveDayForecast.classList.remove("bubblegum-background");
-                            fiveDayForecast.classList.remove("mint-background");
-
-                            divider.classList.add("mulberry-divider");
-                            divider.classList.remove("bubblegum-divider");
-                            divider.classList.remove("mint-divider");
-
-                            document.querySelectorAll("p").forEach(element => {
-                                element.classList.add("mulberry-text");
-                                element.classList.remove("bubblegum-text");
-                                element.classList.remove("mint-text");
-
-                            })
-                            document.querySelectorAll("h5").forEach(element => {
-                                element.classList.add("mulberry-text");
-                                element.classList.remove("mint-text");
-                                element.classList.remove("bubblegum-text");
-                            })
-
-
-                        } else if (localStorage.getItem("mint") === "true" || mintClicked === true) {
-                            fiveDayForecast.classList.add("mint-background");
-                            fiveDayForecast.classList.remove("bubblegum-background");
-                            fiveDayForecast.classList.remove("mulberry-background");
-
-                            divider.classList.add("mint-divider");
-                            divider.classList.remove("mulberry-divider");
-                            divider.classList.remove("bubblegum-divider");
-
-                            document.querySelectorAll("p").forEach(element => {
-                                element.classList.add("mint-text");
-                                element.classList.remove("mulberry-text");
-                                element.classList.remove("bubblegum-text");
-                            })
-                            document.querySelectorAll("h5").forEach(element => {
-                                element.classList.add("mint-text");
-                                element.classList.remove("mulberry-text");
-                                element.classList.remove("bubblegum-text");
-                            })
-                        } else if (localStorage.getItem("bubblegum") === "true" || bubblegumClicked === true) {
-                            fiveDayForecast.classList.add("bubblegum-background");
-                            fiveDayForecast.classList.remove("mulberry-background");
-                            fiveDayForecast.classList.remove("mint-background");
-
-                            divider.classList.add("bubblegum-divider");
-                            divider.classList.remove("mint-divider");
-                            divider.classList.remove("mulberry-divider");
-
-                            document.querySelectorAll("p").forEach(element => {
-                                element.classList.add("bubblegum-text");
-                                element.classList.remove("mint-text");
-                                element.classList.remove("mulberry-text");
-                            })
-                            document.querySelectorAll("h5").forEach(element => {
-                                element.classList.add("bubblegum-text");
-                                element.classList.remove("mint-text");
-                                element.classList.remove("mulberry-text");
-                            })
-                        }
-                        
-                        
-
+                        fiveWeek[i - 1].innerHTML = weekday[(date.day() + 7 + i) % 7];                   
                         
                         i++;
                     }
-
-                    var fiveDayForecast = document.createElement("div");
-
-                    var fiveDayDate = document.createElement("p");
-
-                    var maxMin = document.createElement("div");
-                    var maxTemp = document.createElement("p");
-                    var divider = document.createElement("div");
-                    var minTemp = document.createElement("p");
-
-                    var humiditySpeed = document.createElement("div");
-                    var fiveHumidity = document.createElement("div");
-                    var humidityText = document.createElement("h5");
-                    var humidityValue = document.createElement("p");
-                    var fiveWindSpeed = document.createElement("div");
-                    var speedText = document.createElement("h5");
-                    var speedValue = document.createElement("p");
                     
-                    var date = dayjs();
-                    fiveDayForecast.setAttribute("class", "five-day");
-
-
-                    fiveDayDate.innerHTML = weekday[(date.day() + 7 + 5) % 7];
-
-                    // Max and Min 5 Day Forecast
-                    maxMin.setAttribute("class", "five-day-max-min");
-                    minTemp.innerHTML = Math.round(five.list[five.list.length - 1].main.temp_min) + "°";
-                    divider.setAttribute("class", "divider");
-                    maxTemp.innerHTML = Math.round(five.list[five.list.length - 1].main.temp_max) + "°";
-
-                    maxMin.appendChild(minTemp);
-                    maxMin.appendChild(divider);
-                    maxMin.appendChild(maxTemp);
-
-                    // Humidity and wind speed 5 day forecast
-                    humiditySpeed.setAttribute("class", "five-humidity-wind-speed");
-
-                    fiveHumidity.setAttribute("class", "five-humidity");
-                    humidityText.innerHTML = "Humidity";
-                    humidityValue.innerHTML = five.list[five.list.length - 1].main.humidity + "%";
-                    fiveHumidity.appendChild(humidityText);
-                    fiveHumidity.appendChild(humidityValue);
-                    humiditySpeed.appendChild(fiveHumidity);
-
-                    fiveWindSpeed.setAttribute("class", "five-wind-speed");
-                    speedText.innerHTML = "Wind Speed";
-                    speedValue.innerHTML = five.list[five.list.length - 1].wind.speed.toFixed(1) + " mph";
-                    fiveWindSpeed.appendChild(speedText);
-                    fiveWindSpeed.appendChild(speedValue);
-                    humiditySpeed.appendChild(fiveWindSpeed);
-
-                    fiveDayForecast.appendChild(fiveDayDate);
-                    fiveDayForecast.appendChild(maxMin);
-                    fiveDayForecast.appendChild(humiditySpeed);
-
-                    weekSlide.appendChild(fiveDayForecast);
-
-                    // console.log(five.list[five.list.length - 1]);
-                    
-                    if (localStorage.getItem("mulberry") === "true" || mulberryClicked === true) {
-                        fiveDayForecast.classList.add("mulberry-background");
-                        fiveDayForecast.classList.remove("bubblegum-background");
-                        fiveDayForecast.classList.remove("mint-background");
-
-                        divider.classList.add("mulberry-divider");
-                        divider.classList.remove("bubblegum-divider");
-                        divider.classList.remove("mint-divider");
-
-                        document.querySelectorAll("p").forEach(element => {
-                            element.classList.add("mulberry-text");
-                            element.classList.remove("bubblegum-text");
-                            element.classList.remove("mint-text");
-
-                        })
-                        document.querySelectorAll("h5").forEach(element => {
-                            element.classList.add("mulberry-text");
-                            element.classList.remove("mint-text");
-                            element.classList.remove("bubblegum-text");
-                        })
-
-
-                    } else if (localStorage.getItem("mint") === "true" || mintClicked === true) {
-                        fiveDayForecast.classList.add("mint-background");
-                        fiveDayForecast.classList.remove("bubblegum-background");
-                        fiveDayForecast.classList.remove("mulberry-background");
-
-                        divider.classList.add("mint-divider");
-                        divider.classList.remove("mulberry-divider");
-                        divider.classList.remove("bubblegum-divider");
-
-                        document.querySelectorAll("p").forEach(element => {
-                            element.classList.add("mint-text");
-                            element.classList.remove("mulberry-text");
-                            element.classList.remove("bubblegum-text");
-                        })
-                        document.querySelectorAll("h5").forEach(element => {
-                            element.classList.add("mint-text");
-                            element.classList.remove("mulberry-text");
-                            element.classList.remove("bubblegum-text");
-                        })
-                    } else if (localStorage.getItem("bubblegum") === "true" || bubblegumClicked === true) {
-                        fiveDayForecast.classList.add("bubblegum-background");
-                        fiveDayForecast.classList.remove("mulberry-background");
-                        fiveDayForecast.classList.remove("mint-background");
-
-                        divider.classList.add("bubblegum-divider");
-                        divider.classList.remove("mint-divider");
-                        divider.classList.remove("mulberry-divider");
-
-                        document.querySelectorAll("p").forEach(element => {
-                            element.classList.add("bubblegum-text");
-                            element.classList.remove("mint-text");
-                            element.classList.remove("mulberry-text");
-                        })
-                        document.querySelectorAll("h5").forEach(element => {
-                            element.classList.add("bubblegum-text");
-                            element.classList.remove("mint-text");
-                            element.classList.remove("mulberry-text");
-                        })
+                    var x = 1;
+                    while (x < 5) {
+                        console.log(five.list[0].dt);
+                        minimumTemp[x - 1].innerHTML = Math.round(five.list[x*8].main.temp_min) + "°";
+                        maximumTemp[x - 1].innerHTML = Math.round(five.list[x*8].main.temp_max) + "°";
+                        windMPH[x - 1].innerHTML = five.list[x*8].wind.speed.toFixed(1) + " mph";
+                        humidPer[x - 1].innerHTML = five.list[x*8].main.humidity + "%";
+                        
+                        x++;
                     }
 
-                    console.log(mintClicked, mulberryClicked, bubblegumClicked);
+                    minimumTemp[4].innerHTML = Math.round(five.list[five.list.length - 1].main.temp_min) + "°";
+                    maximumTemp[4].innerHTML = Math.round(five.list[five.list.length - 1].main.temp_max) + "°";
+                    windMPH[4].innerHTML = five.list[five.list.length - 1].wind.speed.toFixed(1) + " mph";
+                    humidPer[4].innerHTML = five.list[five.list.length - 1].main.humidity + "%";                        
+                        
+                       
+                    })
+
+                    
                 })
 
             
-        });    
+        };    
+
+
+// function getIcons(city) {
+//     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&limit=1&units=imperial&appid=" + apiKey;
+
+//     fetch(weatherURL)
+//         .then(response => response.json())
+//         .then(function(data) {
+//             if (data.weather[0].main === "Clear" && mintClicked) { 
+
+//             }
+//         })
+// }
+
+function setMoment() {
+    setInterval(function() {
+        var currentHour = dayjs().format("H");
+
+        if (currentHour >= 0 &&  currentHour < 12 && localStorage.getItem("mulberry" === "true")) {
+            timeIcon.src = "../mulberry/morning_sm.png";
+        }
+        if (currentHour >= 0 && currentHour < 12 && localStorage.getItem("mint" === "true")) {
+            timeIcon.src = "../mint/morning.png";
+        }
+        if (currentHour >= 0 && currentHour < 12 && localStorage.getItem("bubblegum" === "true")) {
+            timeIcon.src = "../bubblegum/morning.png";
+        }
+        if (currentHour >= 12 &&  currentHour < 17 && localStorage.getItem("mulberry" === "true")) {
+            timeIcon.src = "./mulberry/afternoon.png";
+        }
+        if (currentHour >= 12 &&  currentHour < 17 && localStorage.getItem("mint" === "true")) {
+            timeIcon.src = "./mint/afternoon.png";
+        }
+        if (currentHour >= 12 &&  currentHour < 17 && localStorage.getItem("bubblegum" === "true")) {
+            timeIcon.src = "./bubblegum/afternoon.png";
+        }
+        if (currentHour >= 17 &&  currentHour <= 23 && localStorage.getItem("mulberry" === "true")) {
+            timeIcon.src = "../mulberry/evening.png";
+        }
+        if (currentHour >= 17 &&  currentHour <= 23 && localStorage.getItem("mint" === "true")) {
+            timeIcon.src = "../mint/evening.png";
+        }
+        if (currentHour >= 17 &&  currentHour <= 23 && localStorage.getItem("bubblegum" === "true")) {
+            timeIcon.src = "../bubblegum/evening.png";
+        }
+    }, 1000)
+    
 }
 
+setMoment();
 
 
 
@@ -487,6 +315,10 @@ var divider = document.querySelectorAll(".divider");
 var iconic = document.querySelectorAll(".bx");
 var largeDash = document.querySelector(".major-left-weather");
 
+var h5 = document.querySelectorAll("h5");
+var h3 = document.querySelectorAll("h3");
+var pTag = document.querySelectorAll("p");
+
 var feelsLikeBackground = document.querySelector("#feels-like");
 var humidityBackground = document.querySelector("#humidity");
 var windSpeedBackground = document.querySelector("#wind-speed");
@@ -500,9 +332,17 @@ var fiveIcon = document.getElementById("five-icon");
 var greeting = document.getElementById("greeting");
 
 
+const listParagraph = document.querySelector("#list-paragraph");
+const searchOption = document.getElementById("#search-option");
+
+
 
 // Function enables user to change color theme of dashboard
 function mode(firstMode, secondMode, thirdMode) {
+    document.body.classList.add(firstMode + "-background");
+    document.body.classList.remove(secondMode + "-background");
+    document.body.classList.remove(thirdMode + "-background");
+
     mainContainer.classList.add(firstMode + "-body");
     mainContainer.classList.remove(secondMode + "-body");
     mainContainer.classList.remove(thirdMode + "-body");
@@ -598,6 +438,7 @@ function mode(firstMode, secondMode, thirdMode) {
         speedIcon.style.color = "#FFBF84";
         fiveIcon.style.color = "#FFBF84";
         fiveTitle.style.color = "#FFBF84";
+        // searchOption.style.borderBottomColor = "#FFBF84";
         inputSelect.style.backgroundColor = "#8C3B3B";
         inputSelect.style.color = "#FFBF84";
         greeting.style.color = "#FFBF84";
@@ -608,6 +449,7 @@ function mode(firstMode, secondMode, thirdMode) {
         speedIcon.style.color = "#7BADA1";
         fiveIcon.style.color = "#7BADA1";
         fiveTitle.style.color = "#7BADA1";
+        // searchOption.style.borderBottomColor = "#7BADA1";
         inputSelect.style.backgroundColor = "#E8FFFE";
         inputSelect.style.color = "#7BADA1";
         greeting.style.color = "#FFFFFF";
@@ -618,10 +460,12 @@ function mode(firstMode, secondMode, thirdMode) {
         speedIcon.style.color = "#FE6262";
         fiveIcon.style.color = "#FE6262";
         fiveTitle.style.color = "#FE6262";
+        // searchOption.style.borderBottomColor = "#FE6262";
         inputSelect.style.backgroundColor = "#FFCCCC";
         inputSelect.style.color = "#FE6262";
         greeting.style.color = "#FFA7A7";
     }
+
     
 }
 
@@ -639,9 +483,6 @@ mulberry.addEventListener("click", function() {
     localStorage.setItem("mulberry", true);
     localStorage.setItem("bubblegum", false);
     localStorage.setItem("mint", false);
-    mulberryClicked = true;
-    mintClicked = false;
-    bubblegumClicked = false;
 
     mode("mulberry", "mint", "bubblegum");
     
@@ -653,9 +494,6 @@ bubblegum.addEventListener("click", function() {
     localStorage.setItem("mulberry", false);
     localStorage.setItem("mint", false);
     localStorage.setItem("bubblegum", true);
-    mulberryClicked = false;
-    mintClicked = false;
-    bubblegumClicked = true;
 
     mode("bubblegum", "mint", "mulberry");
 })
@@ -666,9 +504,6 @@ mint.addEventListener("click", function() {
     localStorage.setItem("mulberry", false);
     localStorage.setItem("bubblegum", false);
     localStorage.setItem("mint", true);
-    mulberryClicked = false;
-    mintClicked = true;
-    bubblegumClicked = false;
 
     mode("mint", "mulberry", "bubblegum");
 })
