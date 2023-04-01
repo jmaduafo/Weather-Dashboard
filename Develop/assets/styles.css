@@ -191,7 +191,7 @@ h5 {
     width: 50em;
     border-radius: 20px;
     padding: 20px 40px;
-    background-color: var(--mint-background);
+    background-image: linear-gradient(#e8fffe4a, #E8FFFE);
     position: relative;
     transition: all .4s ease;
 }
@@ -425,4 +425,112 @@ h5 {
 
 .btn:hover {
     cursor: pointer
+}
+
+.mulberry-background {
+    background-color: #8C3B3B;
+    transition: all .4s ease;
+}
+
+.mint-background {
+    background-color: var(--mint-background);
+    transition: all .4s ease;
+}
+
+.bubblegum-background {
+    background-color: #FFCCCC;
+    transition: all .4s ease;
+}
+
+.mulberry-text {
+    color: #FFBF84;
+    transition: all .4s ease;
+}
+
+.mint-text {
+    color: var(--mint-text);
+    transition: all .4s ease;
+}
+
+.bubblegum-text {
+    color: #FE6262;
+    transition: all .4s ease;
+}
+
+.mulberry-time {
+    color: #FFBF84;
+    transition: all .4s ease;
+}
+
+.mint-time {
+    color: white;
+    transition: all .4s ease;
+}
+
+.bubblegum-time {
+    color: #FE6262;
+    transition: all .4s ease;
+}
+
+.mulberry-divider {
+    background-color: #FFBF84;
+    transition: all .4s ease;
+}
+
+.mint-divider {
+    background-color: var(--mint-text);
+    transition: all .4s ease;
+}
+
+.bubblegum-divider {
+    background-color: #FF7B7B;
+    transition: all .4s ease;
+}
+
+.mulberry-body {
+    background-color: #410000;
+    transition: all .4s ease;
+}
+
+.mint-body {
+    background-color: #ADD9CE;
+    transition: all .4s ease;
+}
+
+.bubblegum-body {
+    background-color: #FFDDDD;
+    transition: all .4s ease;
+}
+
+.mulberry-gradient {
+    background-image: linear-gradient(#762929, #BD5B5B);
+    transition: all .4s ease;
+}
+
+.mint-gradient {
+    background-image: linear-gradient(#e8fffe4a, #E8FFFE);;
+    transition: all .4s ease;
+}
+
+.bubblegum-gradient {
+    background-image: linear-gradient(#FFB8B8, #FFD3D3);;
+    transition: all .4s ease;
+}
+
+.mulberry-place::-webkit-input-placeholder {
+    color: #FFBF84;
+    opacity: .6;
+    transition: all .4s ease;
+}
+
+.mint-place::-webkit-input-placeholder {
+    color: #7BADA1;
+    opacity: .6;
+    transition: all .4s ease;
+}
+
+.bubblegum-place::-webkit-input-placeholder {
+    color: #FF7B7B;
+    opacity: .6;
+    transition: all .4s ease;
 }

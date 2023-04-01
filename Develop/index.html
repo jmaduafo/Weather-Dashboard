@@ -13,14 +13,14 @@
 </head>
 <body>
     <main>
-        <div class="dashboard-container">
+        <div class="dashboard-container" id="main-container"> 
             <section>
                 <div class="search-with-time">
                     <div class="current-time">
                         <p><span id="current-time">0:00</span><span id="am-pm">AM</span></p>
                     </div>
                     <div class="greeting">
-                        <h5>Good <span id="time-of-day">afternoon</span>, <span id="user-name">Stranger</span></h5>
+                        <h5 id="greeting">Good <span id="time-of-day">afternoon</span>, <span id="user-name">Stranger</span></h5>
                         <img id="time-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABXElEQVR4nO2WQU7DMBBFXRasm224CWJLF6Rch7ZrKgqHKpUSOAFnKAegbLp6aMggucZR7WADizwpUjszyXw7MxMbMxAB8Aw05q9AyZ3kBJgChcfXALXHXgCV3JtCwFQX+gKMA+ILjRWqFAIK64GXAfGTGMGhIsaSHBjp/2tgA7zr9Sg7pb6RxqZJ7gLc0c3S5IR25cIeuAFKvWZq42sncgnYaJKZxzdX3zrlkMEeNMDu0wKlJ152QnizbKfAA/AaPbBoexy7z48IOPMIuFfbwXN6Q1vtwtzjW7ivANiq7fzHyZ2htNd3XurKF1YRVh4BFyYVwJJubp3YFWE0IYNoYg0i2Ym11sROf38bu1qEK2snuqiTjeLkEPkxyvU5vvIl9x1InN4Ppd+hBsWx2b0fSr8ZATy5Nyfv/Viy9H4MTu///oGVw96vAwszr1COF2adW8B2KEz+W2EOmA4+AIIYfW0sxx8BAAAAAElFTkSuQmCC" alt="time of day icon">
                     </div>
                     <div class="color-selectors">
@@ -88,27 +88,27 @@
                             </div>
                         </div>
                         <div class="minor-right-weather">
-                            <div class="feels-like">
+                            <div class="feels-like" id="feels-like">
                                 <div class="right-title feels-like-title">
-                                    <i class='bx bxs-sun' ></i>
+                                    <i class='bx bxs-sun' id="feels-icon"></i>
                                     <h5>Feels Like</h5>
                                 </div>
                                 <div class="right-entry feels-like-entry">
                                     <h3><span id="feels-like-degrees">--</span>°</h3>
                                 </div>
                             </div>
-                            <div class="humidity">
+                            <div class="humidity" id="humidity">
                                 <div class="right-title humidity-title">
-                                    <i class='bx bxs-droplet'></i>
+                                    <i class='bx bxs-droplet' id="humidity-icon"></i>
                                     <h5>Humidity</h5>
                                 </div>
                                 <div class="right-entry humidity-entry">
                                     <h3><span id="humidity-percent">--</span>%</h3>
                                 </div>
                             </div>
-                            <div class="wind-speed">
+                            <div class="wind-speed" id="wind-speed">
                                 <div class="right-title wind-speed-title">
-                                    <i class='bx bx-wind' ></i>
+                                    <i class='bx bx-wind' id="speed-icon"></i>
                                     <h5>Wind Speed</h5>
                                 </div>
                                 <div class="right-entry wind-speed-entry">
@@ -120,118 +120,23 @@
                     <!-- FIVE DAY FORECAST -->
                     <div class="five-day-weather">
                         <div class="five-weather-title">
-                            <i class='bx bx-calendar-alt'></i>
-                            <h5>5-Day Forecast</h3>
+                            <i class='bx bx-calendar-alt' id="five-icon"></i>
+                            <h5 id="five-title">5-Day Forecast</h5>
                         </div>
                         <div class="week-weather" >
                             <div class="week-slide" id="week-slide">
 
                             
-                            <div class="five-day">
-                               <p>Saturday</p>
-                               <i class='bx bx-cloud-drizzle bx-sm'></i>
-                               <div class="five-day-max-min">
-                                    <p><span>45</span>°</p>
-                                    <div class="divider"></div>
-                                    <p><span>52</span>°</p>
-                               </div>
-                               <div class="five-humidity-wind-speed">
-                                    <div class="five-humidity">
-                                        <h5>Humidity</h5>
-                                        <p>65%</p>
-                                    </div>
-                                    <div class="five-wind-speed">
-                                        <h5>Wind Speed</h5>
-                                        <p>1.6 mi</p>
-                                    </div>
-                               </div>
+                            
                             </div>
-                            <div class="five-day">
-                                <p>Saturday</p>
-                               <i class='bx bx-cloud-drizzle bx-sm'></i>
-                               <div class="five-day-max-min">
-                                    <p><span>45</span>°</p>
-                                    <div class="divider"></div>
-                                    <p><span>52</span>°</p>
-                               </div>
-                               <div class="five-humidity-wind-speed">
-                                    <div class="five-humidity">
-                                        <h5>Humidity</h5>
-                                        <p>65%</p>
-                                    </div>
-                                    <div class="five-wind-speed">
-                                        <h5>Wind Speed</h5>
-                                        <p>1.6 mi</p>
-                                    </div>
-                               </div>
+                            <div class="forecast-buttons">
+                                <div class="btn left-btn" id="previous">
+                                    <i class='bx bx-chevron-left bx-sm' ></i>
+                                </div>
+                                <div class="btn right-btn" id="next">
+                                    <i class='bx bx-chevron-right bx-sm' ></i>
+                                </div>
                             </div>
-                            <div class="five-day">
-                                <p>Saturday</p>
-                               <i class='bx bx-cloud-drizzle bx-sm'></i>
-                               <div class="five-day-max-min">
-                                    <p><span>45</span>°</p>
-                                    <div class="divider"></div>
-                                    <p><span>52</span>°</p>
-                               </div>
-                               <div class="five-humidity-wind-speed">
-                                    <div class="five-humidity">
-                                        <h5>Humidity</h5>
-                                        <p>65%</p>
-                                    </div>
-                                    <div class="five-wind-speed">
-                                        <h5>Wind Speed</h5>
-                                        <p>1.6 mi</p>
-                                    </div>
-                               </div>
-                            </div>
-                            <div class="five-day">
-                                <p>Saturday</p>
-                               <i class='bx bx-cloud-drizzle bx-sm'></i>
-                               <div class="five-day-max-min">
-                                    <p><span>45</span>°</p>
-                                    <div class="divider"></div>
-                                    <p><span>52</span>°</p>
-                               </div>
-                               <div class="five-humidity-wind-speed">
-                                    <div class="five-humidity">
-                                        <h5>Humidity</h5>
-                                        <p>65%</p>
-                                    </div>
-                                    <div class="five-wind-speed">
-                                        <h5>Wind Speed</h5>
-                                        <p>1.6 mi</p>
-                                    </div>
-                               </div>
-                            </div>
-                            <div class="five-day">
-                                <p>Saturday</p>
-                               <i class='bx bx-cloud-drizzle bx-sm'></i>
-                               <div class="five-day-max-min">
-                                    <p><span>45</span>°</p>
-                                    <div class="divider"></div>
-                                    <p><span>52</span>°</p>
-                               </div>
-                               <div class="five-humidity-wind-speed">
-                                    <div class="five-humidity">
-                                        <h5>Humidity</h5>
-                                        <p>65%</p>
-                                    </div>
-                                    <div class="five-wind-speed">
-                                        <h5>Wind Speed</h5>
-                                        <p>1.6 mi</p>
-                                    </div>
-                               </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="forecast-buttons">
-                            <div class="btn left-btn" id="previous">
-                                <i class='bx bx-chevron-left bx-sm' ></i>
-                            </div>
-                            <div class="btn right-btn" id="next">
-                                <i class='bx bx-chevron-right bx-sm' ></i>
-                            </div>
-                        </div>
                         
                     </div>
                 </div>
