@@ -50,6 +50,7 @@ setInterval(function() {
     currentTime.innerText = now;
     AMPM.innerText = nowAMPM;
 
+    // Gets the time of day and renders based on user's current time
     var hour = time.format('H');
     if (+hour >= 0 && +hour < 12) {
         timeOfDay.innerText = "MORNING";
@@ -100,45 +101,143 @@ var speed = document.getElementById("speed-miles");
 
 var searchContainer = document.querySelector(".search-container");
 
-var listOfCities = [];
+
+
+let cityList = JSON.parse(localStorage.getItem("cities"));
+
+var historyObj = { city: [] };
+
+function onLoad() {
+  if(localStorage.getItem('history')) {
+    historyObj = JSON.parse(localStorage.getItem('history'));
+
+    historyObj.city.forEach(function(i, idx, city) {
+        const para = document.createElement("p");
+        const div = document.createElement("div");
+        
+
+        para.setAttribute("id", "list-paragraph");
+        div.setAttribute("class", "search-option");
+
+        para.innerHTML = city[idx];
+
+        div.appendChild(para);
+        searchContainer.appendChild(div);
+
+        
+        
+
+        if (localStorage.getItem("mulberry") === "true") {
+            para.classList.add("mulberry-text");
+            para.classList.remove("mint-text");
+            para.classList.remove("bubblegum-text");
+            
+        }
+        else if (localStorage.getItem("mint") === "true") {
+            para.classList.add("mint-text");
+            para.classList.remove("mulberry-text");
+            para.classList.remove("bubblegum-text");
+            
+        }
+        else if (localStorage.getItem("bubblegum") === "true") {
+            para.classList.add("bubblegum-text");
+            para.classList.remove("mint-text");
+            para.classList.remove("mulberry-text");
+            
+        }
+        
+            
+
+        
+    })
+    
+
+  }
+}
+
+onLoad();
+
+function lastElement() {
+    if(localStorage.getItem('history')) {
+        historyObj = JSON.parse(localStorage.getItem('history'));
+  
+      
+        const para = document.createElement("p");
+        const div = document.createElement("div");
+        
+
+        para.setAttribute("id", "list-paragraph");
+        div.setAttribute("class", "search-option");
+
+        para.innerHTML = historyObj.city[historyObj.city.length - 1];
+
+        div.appendChild(para);
+        searchContainer.appendChild(div);
+
+        para.style.color = "rgba(0, 0, 0, .4)";
+        
+
+        // if (localStorage.getItem("mulberry") === "true") {
+        //     para.classList.add("mulberry-text");
+        //     para.classList.remove("mint-text");
+        //     para.classList.remove("bubblegum-text");
+            
+        // }
+        // else if (localStorage.getItem("mint") === "true") {
+        //     para.classList.add("mint-text");
+        //     para.classList.remove("mulberry-text");
+        //     para.classList.remove("bubblegum-text");
+            
+        // }
+        // else if (localStorage.getItem("bubblegum") === "true") {
+        //     para.classList.add("bubblegum-text");
+        //     para.classList.remove("mint-text");
+        //     para.classList.remove("mulberry-text");
+            
+        // }      
+  
+    }
+}
+
+
+//
+function addHistory(dataToSave) {
+  historyObj.city.push(dataToSave);
+  localStorage.setItem('history', JSON.stringify(historyObj));
+}
+
+// Catches the error if input is invalid
+function undefinedInput() {
+    cityChose.innerHTML = "---";
+    document.getElementById("undefined").style.visibility = "visible";
+}
+
 
 var weekSlide = document.querySelector(".week-slide");
 
+
 searchBtn.addEventListener("click", function() {
     var citySelect = cityName.value;
+
+    
+    fetchWeather(citySelect.toLowerCase());
+    
+    addHistory(citySelect);
+    lastElement(); 
+    
+    // searchHistory(citySelect);
     
 
-    fetchWeather(citySelect.toLowerCase());
-    // getIcons(citySelect.toLowerCase());
-        
-    const para = document.createElement("p");
-    const div = document.createElement("div");
-
-    para.setAttribute("id", "list-paragraph");
-    div.setAttribute("id", "search-option");
-
-    if (listOfCities.length < 13) {
-        listOfCities.unshift(citySelect);
-
-        
-        para.innerHTML = listOfCities[0];
-
-        div.classList.add("search-option");
-        div.appendChild(para);
-
-        searchContainer.appendChild(div);
-
-    } else if (listOfCities.length >= 13) {
-        listOfCities.pop();
+    
+    
         // listOfCities.unshift(citySelect);
+        // var searchHistory = JSON.stringify(listOfCities);
+        // localStorage.setItem("cities", searchHistory);
+        // cityList.push(listOfCities);
+        // localStorage.setItem("allCities", JSON.stringify(cityList));
+        
 
-        // para.innerHTML = listOfCities[0];
-
-        // div.setAttribute("class", "search-option");
-        // div.appendChild(para);
-
-        // searchContainer.appendChild(div);
-    }    
+       
 
     
 })
@@ -200,37 +299,40 @@ function fetchWeather(city) {
 
     fetch(weatherURL)
         .then(response => response.json())
-        .then(function(data) {
-            console.log(data);
-
-
-            cityChose.innerText = data.name;
-            currentTemp.innerText = Math.round(data.main.temp);
-            climate.innerText = data.weather[0].description;
-            minTemp.innerText = Math.round(data.main.temp_min);
-            maxTemp.innerText = Math.round(data.main.temp_max);
-            
-
-            feelsLike.innerText = Math.round(data.main.feels_like);
-            humidity.innerText = data.main.humidity;
-            speed.innerText = data.wind.speed.toFixed(1);
-
-            if (data.weather[0].main === "Clouds") {
-                iconMain.setAttribute("class", "bx bxs-cloud bx-sm");
-            } else if (data.weather[0].main === "Thunderstorm") {
-                iconMain.setAttribute("class", "bx bx-cloud-lightning bx-sm");
-            } else if (data.weather[0].main === "Drizzle") {
-                iconMain.setAttribute("class", "bx bx-cloud-drizzle bx-sm");
-            } else if (data.weather[0].main === "Rain") {
-                iconMain.setAttribute("class", "bx bx-cloud-rain bx-sm");
-            } else if (data.weather[0].main === "Snow") {
-                iconMain.setAttribute("class", "bx bx-cloud-snow bx-sm");
-            } else if (data.weather[0].main === "Clear") {
-                iconMain.setAttribute("class", "bx bxs-leaf bx-sm");
+        .then(data => {
+            if (data.name === undefined) {
+                undefinedInput();
             } else {
-                iconMain.setAttribute("class", "bx bx-wind bx-sm");
-            }
+                document.getElementById("undefined").style.visibility = "hidden";
+                cityChose.innerText = data.name;
+                currentTemp.innerText = Math.round(data.main.temp);
+                climate.innerText = data.weather[0].description;
+                minTemp.innerText = Math.round(data.main.temp_min);
+                maxTemp.innerText = Math.round(data.main.temp_max);
+                
 
+                feelsLike.innerText = Math.round(data.main.feels_like);
+                humidity.innerText = data.main.humidity;
+                speed.innerText = data.wind.speed.toFixed(1);
+
+                if (data.weather[0].main === "Clouds") {
+                    iconMain.setAttribute("class", "bx bxs-cloud bx-sm");
+                } else if (data.weather[0].main === "Thunderstorm") {
+                    iconMain.setAttribute("class", "bx bx-cloud-lightning bx-sm");
+                } else if (data.weather[0].main === "Drizzle") {
+                    iconMain.setAttribute("class", "bx bx-cloud-drizzle bx-sm");
+                } else if (data.weather[0].main === "Rain") {
+                    iconMain.setAttribute("class", "bx bx-cloud-rain bx-sm");
+                } else if (data.weather[0].main === "Snow") {
+                    iconMain.setAttribute("class", "bx bx-cloud-snow bx-sm");
+                } else if (data.weather[0].main === "Clear") {
+                    iconMain.setAttribute("class", "bx bxs-leaf bx-sm");
+                } else {
+                    iconMain.setAttribute("class", "bx bx-wind bx-sm");
+                }
+
+            }
+            
 
 
             // sunrise.innerText = changeTimeZone(new Date(data.sys.sunrise * 1000), timezone);
@@ -256,7 +358,7 @@ function fetchWeather(city) {
                     
                     var x = 1;
                     while (x < 5) {
-                        
+                        // Sets values
                         minimumTemp[x - 1].innerHTML = Math.round(five.list[x*8].main.temp_min) + "°";
                         maximumTemp[x - 1].innerHTML = Math.round(five.list[x*8].main.temp_max) + "°";
                         windMPH[x - 1].innerHTML = five.list[x*8].wind.speed.toFixed(1) + " mph";
@@ -281,10 +383,12 @@ function fetchWeather(city) {
                         x++;
                     }
 
+                    // Sets values for the last element
                     minimumTemp[4].innerHTML = Math.round(five.list[five.list.length - 1].main.temp_min) + "°";
                     maximumTemp[4].innerHTML = Math.round(five.list[five.list.length - 1].main.temp_max) + "°";
                     windMPH[4].innerHTML = five.list[five.list.length - 1].wind.speed.toFixed(1) + " mph";
                     humidPer[4].innerHTML = five.list[five.list.length - 1].main.humidity + "%";
+
                     if (five.list[five.list.length - 1].weather[0].main === "Clouds") {
                         iconic[4].setAttribute("class", "bx bxs-cloud bx-sm");
                     } else if (five.list[five.list.length - 1].weather[0].main === "Thunderstorm") {
@@ -306,9 +410,15 @@ function fetchWeather(city) {
 
                     
                 })
+                .catch(err => {
+                    undefinedInput();
+                    console.log(err);
+                })
+                
 
             
-        };    
+        }
+
 
 
 // function getIcons(city) {
@@ -389,9 +499,7 @@ var speedIcon = document.getElementById("speed-icon");
 var fiveIcon = document.getElementById("five-icon");
 var greeting = document.getElementById("greeting");
 
-
-const listParagraph = document.querySelector("#list-paragraph");
-const searchOption = document.getElementById("#search-option");
+const searchOption = document.getElementById("#search-container div");
 
 
 
@@ -504,11 +612,7 @@ function mode(firstMode, secondMode, thirdMode) {
         iconic3.style.color = "#FFBF84";
         iconic4.style.color = "#FFBF84";
         iconic5.style.color = "#FFBF84";
-
-        iconic1.style.color = "#FFBF84";
-        iconic1.style.color = "#FFBF84";
-        iconic1.style.color = "#FFBF84";
-        iconic1.style.color = "#FFBF84";
+        // searchOption.style.color = "#FFBF84";
     }
     if (firstMode === "mint") {
         feelsIcon.style.color = "#7BADA1";
@@ -522,6 +626,7 @@ function mode(firstMode, secondMode, thirdMode) {
         iconic3.style.color = "#7BADA1";
         iconic4.style.color = "#7BADA1";
         iconic5.style.color = "#7BADA1";
+        // searchOption.style.color = "#7BADA1";
         // searchOption.style.borderBottomColor = "#7BADA1";
         inputSelect.style.backgroundColor = "#E8FFFE";
         inputSelect.style.color = "#7BADA1";
