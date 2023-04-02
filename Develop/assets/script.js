@@ -139,6 +139,13 @@ function onLoad() {
             para.classList.remove("mulberry-text");
             
         }
+        
+        // Allows names listed in the history to be reselected and renders
+        // the selected name on the dashboard
+        div.addEventListener("click", function() {
+            fetchWeather(this.firstChild.innerHTML);
+        })
+
 
        
              
@@ -170,7 +177,13 @@ function lastElement() {
         div.appendChild(para);
         searchContainer.appendChild(div);
 
-        para.style.color = "rgba(0, 0, 0, .4)";     
+        para.style.color = "rgba(0, 0, 0, .4)"; 
+        
+        // Allows names listed in the history to be reselected and renders
+        // the selected name on the dashboard
+        div.addEventListener("click", function() {
+            fetchWeather(this.firstChild.innerHTML);
+        })
   
     }
 }
@@ -207,7 +220,7 @@ searchBtn.addEventListener("click", function() {
     fetchWeather(citySelect.toLowerCase());
     
     addHistory(citySelect);
-    lastElement();     
+    lastElement();
 })
 
 // Fetches current weather based on user's location
