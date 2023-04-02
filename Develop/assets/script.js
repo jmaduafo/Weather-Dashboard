@@ -106,6 +106,7 @@ var weekSlide = document.querySelector(".week-slide");
 
 searchBtn.addEventListener("click", function() {
     var citySelect = cityName.value;
+    
 
     fetchWeather(citySelect.toLowerCase());
     // getIcons(citySelect.toLowerCase());
@@ -181,6 +182,15 @@ var minimumTemp = document.querySelectorAll(".minimum");
 var maximumTemp = document.querySelectorAll(".maximum");
 var humidPer = document.querySelectorAll(".five-humid-per");
 var windMPH = document.querySelectorAll(".five-wind-mph");
+var iconic = document.querySelectorAll(".iconic");
+var iconic1 = document.getElementById("iconic-1");
+var iconic2 = document.getElementById("iconic-2");
+var iconic3 = document.getElementById("iconic-3");
+var iconic4 = document.getElementById("iconic-4");
+var iconic5 = document.getElementById("iconic-5");
+
+var iconMain = document.querySelector(".icon-main");
+var iconMainId = document.querySelector("#icon-main");
 
 
 // Fetches any weather from any city and passes values into
@@ -191,6 +201,9 @@ function fetchWeather(city) {
     fetch(weatherURL)
         .then(response => response.json())
         .then(function(data) {
+            console.log(data);
+
+
             cityChose.innerText = data.name;
             currentTemp.innerText = Math.round(data.main.temp);
             climate.innerText = data.weather[0].description;
@@ -201,6 +214,22 @@ function fetchWeather(city) {
             feelsLike.innerText = Math.round(data.main.feels_like);
             humidity.innerText = data.main.humidity;
             speed.innerText = data.wind.speed.toFixed(1);
+
+            if (data.weather[0].main === "Clouds") {
+                iconMain.setAttribute("class", "bx bxs-cloud bx-sm");
+            } else if (data.weather[0].main === "Thunderstorm") {
+                iconMain.setAttribute("class", "bx bx-cloud-lightning bx-sm");
+            } else if (data.weather[0].main === "Drizzle") {
+                iconMain.setAttribute("class", "bx bx-cloud-drizzle bx-sm");
+            } else if (data.weather[0].main === "Rain") {
+                iconMain.setAttribute("class", "bx bx-cloud-rain bx-sm");
+            } else if (data.weather[0].main === "Snow") {
+                iconMain.setAttribute("class", "bx bx-cloud-snow bx-sm");
+            } else if (data.weather[0].main === "Clear") {
+                iconMain.setAttribute("class", "bx bxs-leaf bx-sm");
+            } else {
+                iconMain.setAttribute("class", "bx bx-wind bx-sm");
+            }
 
 
 
@@ -213,11 +242,10 @@ function fetchWeather(city) {
             fetch(fiveDayURL)
                 .then(response => response.json())
                 .then(function(five) {
-                    console.log(five);
                     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
                     
                     var i = 1;
-                    
+                
 
                     while (i < 6) {
                         var date = dayjs();
@@ -228,11 +256,27 @@ function fetchWeather(city) {
                     
                     var x = 1;
                     while (x < 5) {
-                        console.log(five.list[0].dt);
+                        
                         minimumTemp[x - 1].innerHTML = Math.round(five.list[x*8].main.temp_min) + "°";
                         maximumTemp[x - 1].innerHTML = Math.round(five.list[x*8].main.temp_max) + "°";
                         windMPH[x - 1].innerHTML = five.list[x*8].wind.speed.toFixed(1) + " mph";
                         humidPer[x - 1].innerHTML = five.list[x*8].main.humidity + "%";
+
+                        if (five.list[x*8].weather[0].main === "Clouds") {
+                            iconic[x - 1].setAttribute("class", "bx bxs-cloud bx-sm");
+                        } else if (five.list[x*8].weather[0].main === "Thunderstorm") {
+                            iconic[x - 1].setAttribute("class", "bx bx-cloud-lightning bx-sm");
+                        } else if (five.list[x*8].weather[0].main === "Drizzle") {
+                            iconic[x - 1].setAttribute("class", "bx bx-cloud-drizzle bx-sm");
+                        } else if (five.list[x*8].weather[0].main === "Rain") {
+                            iconic[x - 1].setAttribute("class", "bx bx-cloud-rain bx-sm");
+                        } else if (five.list[x*8].weather[0].main === "Snow") {
+                            iconic[x - 1].setAttribute("class", "bx bx-cloud-snow bx-sm");
+                        } else if (five.list[x*8].weather[0].main === "Clear") {
+                            iconic[x - 1].setAttribute("class", "bx bxs-leaf bx-sm");
+                        } else {
+                            iconic[x - 1].setAttribute("class", "bx bx-wind bx-sm");
+                        }
                         
                         x++;
                     }
@@ -240,7 +284,22 @@ function fetchWeather(city) {
                     minimumTemp[4].innerHTML = Math.round(five.list[five.list.length - 1].main.temp_min) + "°";
                     maximumTemp[4].innerHTML = Math.round(five.list[five.list.length - 1].main.temp_max) + "°";
                     windMPH[4].innerHTML = five.list[five.list.length - 1].wind.speed.toFixed(1) + " mph";
-                    humidPer[4].innerHTML = five.list[five.list.length - 1].main.humidity + "%";                        
+                    humidPer[4].innerHTML = five.list[five.list.length - 1].main.humidity + "%";
+                    if (five.list[five.list.length - 1].weather[0].main === "Clouds") {
+                        iconic[4].setAttribute("class", "bx bxs-cloud bx-sm");
+                    } else if (five.list[five.list.length - 1].weather[0].main === "Thunderstorm") {
+                        iconic[4].setAttribute("class", "bx bx-cloud-lightning bx-sm");
+                    } else if (five.list[five.list.length - 1].weather[0].main === "Drizzle") {
+                        iconic[4].setAttribute("class", "bx bx-cloud-drizzle bx-sm");
+                    } else if (five.list[five.list.length - 1].weather[0].main === "Rain") {
+                        iconic[4].setAttribute("class", "bx bx-cloud-rain bx-sm");
+                    } else if (five.list[five.list.length - 1].weather[0].main === "Snow") {
+                        iconic[4].setAttribute("class", "bx bx-cloud-snow bx-sm");
+                    } else if (five.list[five.list.length - 1].weather[0].main === "Clear") {
+                        iconic[4].setAttribute("class", "bx bxs-leaf bx-sm");
+                    } else {
+                        iconic[4].setAttribute("class", "bx bx-wind bx-sm");
+                    }                  
                         
                        
                     })
@@ -312,7 +371,6 @@ var searchContainer = document.querySelector("#search-container");
 
 var fiveDay = document.querySelectorAll(".five-day");
 var divider = document.querySelectorAll(".divider");
-var iconic = document.querySelectorAll(".bx");
 var largeDash = document.querySelector(".major-left-weather");
 
 var h5 = document.querySelectorAll("h5");
@@ -374,12 +432,6 @@ function mode(firstMode, secondMode, thirdMode) {
         element.classList.remove(thirdMode +"-text")
     })
 
-    iconic.forEach(element => {
-        element.classList.add(firstMode +"-text")
-        element.classList.remove(secondMode +"-text")
-        element.classList.remove(thirdMode +"-text")
-    })
-
     fiveDay.forEach(element => {
         element.classList.add(firstMode +"-background")
         element.classList.remove(secondMode +"-background")
@@ -391,6 +443,10 @@ function mode(firstMode, secondMode, thirdMode) {
         element.classList.remove(secondMode +"-divider")
         element.classList.remove(thirdMode +"-divider")
     })
+
+    iconMain.classList.add(firstMode +"-text")
+    iconMain.classList.remove(secondMode +"-text")
+    iconMain.classList.remove(thirdMode +"-text")
 
     feelsLikeBackground.classList.add(firstMode + "-background");
     feelsLikeBackground.classList.remove(secondMode + "-background");
@@ -442,6 +498,17 @@ function mode(firstMode, secondMode, thirdMode) {
         inputSelect.style.backgroundColor = "#8C3B3B";
         inputSelect.style.color = "#FFBF84";
         greeting.style.color = "#FFBF84";
+        iconMainId.style.color = "#FFBF84";
+        iconic1.style.color = "#FFBF84";
+        iconic2.style.color = "#FFBF84";
+        iconic3.style.color = "#FFBF84";
+        iconic4.style.color = "#FFBF84";
+        iconic5.style.color = "#FFBF84";
+
+        iconic1.style.color = "#FFBF84";
+        iconic1.style.color = "#FFBF84";
+        iconic1.style.color = "#FFBF84";
+        iconic1.style.color = "#FFBF84";
     }
     if (firstMode === "mint") {
         feelsIcon.style.color = "#7BADA1";
@@ -449,6 +516,12 @@ function mode(firstMode, secondMode, thirdMode) {
         speedIcon.style.color = "#7BADA1";
         fiveIcon.style.color = "#7BADA1";
         fiveTitle.style.color = "#7BADA1";
+        iconMainId.style.color = "#7BADA1";
+        iconic1.style.color = "#7BADA1";
+        iconic2.style.color = "#7BADA1";
+        iconic3.style.color = "#7BADA1";
+        iconic4.style.color = "#7BADA1";
+        iconic5.style.color = "#7BADA1";
         // searchOption.style.borderBottomColor = "#7BADA1";
         inputSelect.style.backgroundColor = "#E8FFFE";
         inputSelect.style.color = "#7BADA1";
@@ -460,6 +533,12 @@ function mode(firstMode, secondMode, thirdMode) {
         speedIcon.style.color = "#FE6262";
         fiveIcon.style.color = "#FE6262";
         fiveTitle.style.color = "#FE6262";
+        iconMainId.style.color = "#FE6262";
+        iconic1.style.color = "#FE6262";
+        iconic2.style.color = "#FE6262";
+        iconic3.style.color = "#FE6262";
+        iconic4.style.color = "#FE6262";
+        iconic5.style.color = "#FE6262";
         // searchOption.style.borderBottomColor = "#FE6262";
         inputSelect.style.backgroundColor = "#FFCCCC";
         inputSelect.style.color = "#FE6262";

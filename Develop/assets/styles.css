@@ -179,6 +179,7 @@ h5 {
 /* ----------TOP RIGHT DASHBOARD WITH TODAY WEATHER----------- */
 
 .today-weather {
+    width: 78%;
     display: flex;
     justify-content: left;
     margin: 15px 0;
@@ -188,7 +189,7 @@ h5 {
 
 /* ---------------TODAY LEFT SECTION------------------- */
 .major-left-weather {
-    width: 50em;
+    width: 84%;
     border-radius: 20px;
     padding: 20px 40px;
     background-image: linear-gradient(#e8fffe4a, #E8FFFE);
@@ -257,6 +258,7 @@ h5 {
 }
 
 .minor-right-weather {
+    width: 16%;
     display: flex;
     flex-direction: column;
     gap: 40px;
