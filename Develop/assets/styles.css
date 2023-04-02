@@ -133,7 +133,9 @@ h5 {
 
 .search-btn {
     position: absolute;
-    transform: translate(215px,-28.5px);
+    margin-top: -29px;
+    margin-left: 90%;
+    right: 0;
     background-color: var(--mint-text);
     width: 25px;
     height: 25px;
@@ -170,6 +172,10 @@ h5 {
     overflow-y: scroll;
 }
 
+.search-container::-webkit-scrollbar {
+    width: 0px;
+}
+
 .search-option {
     font-weight: 300;
     text-align: center;
@@ -177,17 +183,25 @@ h5 {
     padding: 8px;
     border-bottom: 1px solid rgba(0, 0, 0, .15);
     width: 80%;
-
 }
 
 #undefined {
-    margin-top: -15px;
-    margin-bottom: 25px;
+    margin-top: 10px;
+    margin-bottom: 15px;
     font-size: 14px;
     font-weight: 300;
     display: flex;
     justify-content: center;
     visibility: hidden;
+}
+
+#cancel {
+    margin-bottom: -10px;
+    width: 10%;
+}
+
+#cancel:hover {
+    cursor: pointer;
 }
 
 /* ----------TOP RIGHT DASHBOARD WITH TODAY WEATHER----------- */

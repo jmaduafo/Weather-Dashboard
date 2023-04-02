@@ -21,11 +21,8 @@ function previous() {
     } else if (x <= 0){
         x = 0
         weekSlide.style.transform = "translateX(-" + 80 * x + "px)";
-    }
-
-    
+    } 
 }
-
 
 
 nextBtn.addEventListener("click", next);
@@ -101,12 +98,12 @@ var speed = document.getElementById("speed-miles");
 
 var searchContainer = document.querySelector(".search-container");
 
+var cancel = document.getElementById("cancel");
 
-
-let cityList = JSON.parse(localStorage.getItem("cities"));
-
+// Initializes list to add to localstorage
 var historyObj = { city: [] };
 
+// On refresh, the city history is rendered
 function onLoad() {
   if(localStorage.getItem('history')) {
     historyObj = JSON.parse(localStorage.getItem('history'));
@@ -122,10 +119,7 @@ function onLoad() {
         para.innerHTML = city[idx];
 
         div.appendChild(para);
-        searchContainer.appendChild(div);
-
-        
-        
+        searchContainer.appendChild(div);   
 
         if (localStorage.getItem("mulberry") === "true") {
             para.classList.add("mulberry-text");
@@ -145,18 +139,20 @@ function onLoad() {
             para.classList.remove("mulberry-text");
             
         }
-        
-            
 
-        
+       
+             
     })
     
 
   }
 }
 
+// Call function so that after refresh, all elements on the list are displayed
+// on the application
 onLoad();
 
+// Adds the last element in history list and renders on application
 function lastElement() {
     if(localStorage.getItem('history')) {
         historyObj = JSON.parse(localStorage.getItem('history'));
@@ -174,33 +170,20 @@ function lastElement() {
         div.appendChild(para);
         searchContainer.appendChild(div);
 
-        para.style.color = "rgba(0, 0, 0, .4)";
-        
-
-        // if (localStorage.getItem("mulberry") === "true") {
-        //     para.classList.add("mulberry-text");
-        //     para.classList.remove("mint-text");
-        //     para.classList.remove("bubblegum-text");
-            
-        // }
-        // else if (localStorage.getItem("mint") === "true") {
-        //     para.classList.add("mint-text");
-        //     para.classList.remove("mulberry-text");
-        //     para.classList.remove("bubblegum-text");
-            
-        // }
-        // else if (localStorage.getItem("bubblegum") === "true") {
-        //     para.classList.add("bubblegum-text");
-        //     para.classList.remove("mint-text");
-        //     para.classList.remove("mulberry-text");
-            
-        // }      
+        para.style.color = "rgba(0, 0, 0, .4)";     
   
     }
 }
 
+// Deletes history and removes all elements in the search container
+cancel.addEventListener("click", function() {
+    localStorage.removeItem("history");
+    searchContainer.innerHTML = '';
+})
 
-//
+
+// Function adds the city history to list after setting the item
+// in the local storage
 function addHistory(dataToSave) {
   historyObj.city.push(dataToSave);
   localStorage.setItem('history', JSON.stringify(historyObj));
@@ -215,35 +198,21 @@ function undefinedInput() {
 
 var weekSlide = document.querySelector(".week-slide");
 
-
+// After search button is clicked, the system gets the value in the input and passes it into the
+// fetchWeather() function and allows all the appropriate data to render on the page and calls
+// history and render functions
 searchBtn.addEventListener("click", function() {
     var citySelect = cityName.value;
-
     
     fetchWeather(citySelect.toLowerCase());
     
     addHistory(citySelect);
-    lastElement(); 
-    
-    // searchHistory(citySelect);
-    
-
-    
-    
-        // listOfCities.unshift(citySelect);
-        // var searchHistory = JSON.stringify(listOfCities);
-        // localStorage.setItem("cities", searchHistory);
-        // cityList.push(listOfCities);
-        // localStorage.setItem("allCities", JSON.stringify(cityList));
-        
-
-       
-
-    
+    lastElement();     
 })
 
 // Fetches current weather based on user's location
 function currentWeather() {
+    // An ip address API
     var currentURL = "https://ipapi.co/json/"
 
     fetch(currentURL)
@@ -251,8 +220,6 @@ function currentWeather() {
         // Pass in fetchWeather function to get specific location of user
         .then(function(data) {
             fetchWeather(data.city);
-            
-            // sunset.innerText = changeTimeZone(new Date(data.sys.sunset * 1000), data.timezone);
         })
 }
 
@@ -292,7 +259,7 @@ var iconMain = document.querySelector(".icon-main");
 var iconMainId = document.querySelector("#icon-main");
 
 
-// Fetches any weather from any city and passes values into
+// Function enables system to fetch any weather from any city and passes values into
 // appropriate spots in the HTML
 function fetchWeather(city) {
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&limit=1&units=imperial&appid=" + apiKey;
@@ -300,7 +267,7 @@ function fetchWeather(city) {
     fetch(weatherURL)
         .then(response => response.json())
         .then(data => {
-            if (data.name === undefined) {
+            if (data.name === undefined || data.name === null) {
                 undefinedInput();
             } else {
                 document.getElementById("undefined").style.visibility = "hidden";
@@ -332,8 +299,6 @@ function fetchWeather(city) {
                 }
 
             }
-            
-
 
             // sunrise.innerText = changeTimeZone(new Date(data.sys.sunrise * 1000), timezone);
             // sunrise.innerText = changeTimeZone(new Date(data.sys.sunset * 1000), timezone);
@@ -410,28 +375,12 @@ function fetchWeather(city) {
 
                     
                 })
+                // Error catch
                 .catch(err => {
                     undefinedInput();
                     console.log(err);
-                })
-                
-
-            
+                })       
         }
-
-
-
-// function getIcons(city) {
-//     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&limit=1&units=imperial&appid=" + apiKey;
-
-//     fetch(weatherURL)
-//         .then(response => response.json())
-//         .then(function(data) {
-//             if (data.weather[0].main === "Clear" && mintClicked) { 
-
-//             }
-//         })
-// }
 
 function setMoment() {
     setInterval(function() {
@@ -499,6 +448,7 @@ var speedIcon = document.getElementById("speed-icon");
 var fiveIcon = document.getElementById("five-icon");
 var greeting = document.getElementById("greeting");
 
+
 const searchOption = document.getElementById("#search-container div");
 
 
@@ -556,6 +506,10 @@ function mode(firstMode, secondMode, thirdMode) {
     iconMain.classList.remove(secondMode +"-text")
     iconMain.classList.remove(thirdMode +"-text")
 
+    cancel.classList.add(firstMode +"-text")
+    cancel.classList.remove(secondMode +"-text")
+    cancel.classList.remove(thirdMode +"-text")
+
     feelsLikeBackground.classList.add(firstMode + "-background");
     feelsLikeBackground.classList.remove(secondMode + "-background");
     feelsLikeBackground.classList.remove(thirdMode + "-background");
@@ -602,7 +556,6 @@ function mode(firstMode, secondMode, thirdMode) {
         speedIcon.style.color = "#FFBF84";
         fiveIcon.style.color = "#FFBF84";
         fiveTitle.style.color = "#FFBF84";
-        // searchOption.style.borderBottomColor = "#FFBF84";
         inputSelect.style.backgroundColor = "#8C3B3B";
         inputSelect.style.color = "#FFBF84";
         greeting.style.color = "#FFBF84";
@@ -612,7 +565,6 @@ function mode(firstMode, secondMode, thirdMode) {
         iconic3.style.color = "#FFBF84";
         iconic4.style.color = "#FFBF84";
         iconic5.style.color = "#FFBF84";
-        // searchOption.style.color = "#FFBF84";
     }
     if (firstMode === "mint") {
         feelsIcon.style.color = "#7BADA1";
@@ -626,8 +578,6 @@ function mode(firstMode, secondMode, thirdMode) {
         iconic3.style.color = "#7BADA1";
         iconic4.style.color = "#7BADA1";
         iconic5.style.color = "#7BADA1";
-        // searchOption.style.color = "#7BADA1";
-        // searchOption.style.borderBottomColor = "#7BADA1";
         inputSelect.style.backgroundColor = "#E8FFFE";
         inputSelect.style.color = "#7BADA1";
         greeting.style.color = "#FFFFFF";
@@ -644,7 +594,6 @@ function mode(firstMode, secondMode, thirdMode) {
         iconic3.style.color = "#FE6262";
         iconic4.style.color = "#FE6262";
         iconic5.style.color = "#FE6262";
-        // searchOption.style.borderBottomColor = "#FE6262";
         inputSelect.style.backgroundColor = "#FFCCCC";
         inputSelect.style.color = "#FE6262";
         greeting.style.color = "#FFA7A7";
@@ -653,6 +602,7 @@ function mode(firstMode, secondMode, thirdMode) {
     
 }
 
+// Makes sure that the color theme picked by user persists after refresh
 if (localStorage.getItem("mulberry") === "true") {
     mode("mulberry", "mint", "bubblegum");
 } else if (localStorage.getItem("mint") === "true") {
