@@ -233,8 +233,8 @@ function currentWeather() {
         // Pass in fetchWeather function to get specific location of user
         .then(function(data) {
             fetchWeather(data.city);
-            console.log(data);
         })
+        .catch(err => console.log(err))
 }
 
 currentWeather();
@@ -335,15 +335,15 @@ function fetchWeather(city) {
                     
                     
                 
-                    setInterval(function() {
-                        var i = 1;
-                        while (i < 6) {
-                            var date = dayjs();
-                            fiveWeek[i - 1].innerHTML = weekday[(date.day() + 7 + i) % 7];                   
-                            
-                            i++;
-                        }
-                    }, 1000)
+                    
+                    var i = 1;
+                    while (i < 6) {
+                        var date = dayjs();
+                        fiveWeek[i - 1].innerHTML = weekday[(date.day() + 7 + i) % 7];                   
+                        
+                        i++;
+                    }
+                   
                    
                     
                     var x = 1;

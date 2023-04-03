@@ -869,7 +869,7 @@ h5 {
 }
 
 
-@media screen and (min-width: 861px) and (max-width: 1450px) {
+@media screen and (min-width: 861px) and (max-width: 1300px) {
     
     h5 {
         font-size: 11px;
@@ -879,11 +879,161 @@ h5 {
         flex-direction: column;
         height: auto;
         width: 100%;
+        padding: 50px 110px;
     }
 
     /* ---------SIDE BAR WITH SEARCH AND TIME------------ */
+    .left-search, .right-search {
+        width: calc(100% / 2 - 10px); 
+    }
     .search-with-time {
         margin-top: 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+    .main-dashboard {
+        margin-left: 0;
+        margin: 50px 0;
+    }
+
+    .search-container {
+        height: 15em;
+    }
+
+    .search-option {
+        width: 75%;
+    }
+
+    .search-btn {
+        margin-left: 92%;
+        right: 0;
+    }
+
+    .search-input {
+        width: 100%;
+        text-align: center;
+    }
+
+    .search-input input {
+        width: 100%;
+    }
+
+    /* ----------TOP RIGHT DASHBOARD WITH TODAY WEATHER----------- */
+
+    .today-weather {
+        width: 100%;
+        display: flex;
+        justify-content: left;
+        flex-direction: row;
+        margin: 40px 0;
+        gap: 20px;
+        
+    }
+
+    /* ---------------TODAY LEFT SECTION------------------- */
+    .major-left-weather {
+        width: 80%;
+        height: 22em;
+    }
+
+    .minor-right-weather {
+        width: 20%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    .today-date h5 {
+        font-size: 14px;
+    }
+
+    .city-and-weather p {
+        font-size: 21px;
+    }
+
+    .current-weather p {
+        font-size: 11px;
+    }
+
+
+    /* ---------------TODAY RIGHT SECTION------------------- */
+
+    .feels-like, .humidity, .wind-speed {
+        width: 100%;
+        height: calc(100% / 3 - 15px);
+        border-radius: 15px;
+    }
+
+    .right-entry h3 {
+        font-size: 22px;
+    }
+
+    /* ----------BOTTOM RIGHT DASHBOARD WITH 5-DAY WEATHER----------- */
+    .week-weather {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+    .week-weather::-webkit-scrollbar {
+        height: 10px;
+        
+    }
+
+    .week-weather::-webkit-scrollbar-track {
+        border-radius: 5px;
+    }
+
+    .week-weather::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+    }
+
+    .week-slide {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 40px;
+        margin-bottom: 10px;
+    }
+
+
+    .five-humidity-wind-speed {
+        width: 10rem;
+        gap: 20px;
+    }
+
+    .forecast-buttons {
+        visibility: hidden;
+    }
+
+
+    
+}
+
+@media screen and (min-width: 1301px) and (max-width: 1450px) {
+    
+    h5 {
+        font-size: 11px;
+    }
+
+    .dashboard-container {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        padding: 50px 200px;
+    }
+
+    /* ---------SIDE BAR WITH SEARCH AND TIME------------ */
+    .left-search, .right-search {
+        width: calc(100% / 2 - 10px); 
+    }
+    .search-with-time {
+        margin-top: 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
     }
     .main-dashboard {
         margin-left: 0;
@@ -898,7 +1048,7 @@ h5 {
     }
 
     .search-btn {
-        margin-left: 77%;
+        margin-left: 92%;
         right: 0;
     }
 
@@ -908,7 +1058,7 @@ h5 {
     }
 
     .search-input input {
-        width: 60%;
+        width: 100%;
     }
 
     /* ----------TOP RIGHT DASHBOARD WITH TODAY WEATHER----------- */
