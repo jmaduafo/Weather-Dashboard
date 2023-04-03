@@ -920,12 +920,13 @@ h5 {
         flex-direction: row;
         margin: 40px 0;
         gap: 20px;
+        
     }
 
     /* ---------------TODAY LEFT SECTION------------------- */
     .major-left-weather {
         width: 80%;
-        height: 20em;
+        height: 22em;
     }
 
     .minor-right-weather {

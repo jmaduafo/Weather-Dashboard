@@ -425,43 +425,8 @@ function fetchWeather(city) {
                     console.log(err);
                 })       
         }
+ 
 
-function setMoment() {
-    setInterval(function() {
-        var currentHour = dayjs().format("H");
-
-        if (currentHour >= 0 &&  currentHour < 12 && localStorage.getItem("mulberry" === "true")) {
-            timeIcon.src = "../mulberry/morning_sm.png";
-        }
-        if (currentHour >= 0 && currentHour < 12 && localStorage.getItem("mint" === "true")) {
-            timeIcon.src = "../mint/morning.png";
-        }
-        if (currentHour >= 0 && currentHour < 12 && localStorage.getItem("bubblegum" === "true")) {
-            timeIcon.src = "../bubblegum/morning.png";
-        }
-        if (currentHour >= 12 &&  currentHour < 17 && localStorage.getItem("mulberry" === "true")) {
-            timeIcon.src = "./mulberry/afternoon.png";
-        }
-        if (currentHour >= 12 &&  currentHour < 17 && localStorage.getItem("mint" === "true")) {
-            timeIcon.src = "./mint/afternoon.png";
-        }
-        if (currentHour >= 12 &&  currentHour < 17 && localStorage.getItem("bubblegum" === "true")) {
-            timeIcon.src = "./bubblegum/afternoon.png";
-        }
-        if (currentHour >= 17 &&  currentHour <= 23 && localStorage.getItem("mulberry" === "true")) {
-            timeIcon.src = "../mulberry/evening.png";
-        }
-        if (currentHour >= 17 &&  currentHour <= 23 && localStorage.getItem("mint" === "true")) {
-            timeIcon.src = "../mint/evening.png";
-        }
-        if (currentHour >= 17 &&  currentHour <= 23 && localStorage.getItem("bubblegum" === "true")) {
-            timeIcon.src = "../bubblegum/evening.png";
-        }
-    }, 1000)
-    
-}
-
-setMoment();
 
 
 
@@ -493,6 +458,7 @@ var fiveIcon = document.getElementById("five-icon");
 var greeting = document.getElementById("greeting");
 
 var weekWeather = document.querySelector(".week-weather");
+var body = document.querySelector("body");
 
 
 const searchOption = document.getElementById("#search-container div");
@@ -656,6 +622,45 @@ function mode(firstMode, secondMode, thirdMode) {
     
 }
 
+
+setInterval(function() {
+    var currentHour = dayjs().format("H"); 
+
+    if (+currentHour >= 0 &&  +currentHour < 12 && localStorage.getItem("mulberry") === "true") {
+        timeIcon.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABh0lEQVR4nNVVzU4CMRDeEx7VQDj48yIGXwiBV6jJjOjV1+BqgkG0I2wCgiImvol6H7NT2C0uXVqNiTaZpJ125vvaab9GUUBjwgfWMIp+qzEhJ/Z3AZjUDhM0mVRl7bzGmDUMHbEVie1fbBcxbAhLDa/cU1VvYj1VlRgTe+Je2G+Xs4U49QbQ8JgS67fLm9kQPrGGsYy7l1ussSU3iODDWNLHBndUaQEwlpiAXRuwW9xnwpdlcXOmYZ6sCUqaJk+YU0HyFASflzsJAzDHwl5WVFgnAMFEgu/giAlquaS2f1EvF9PY2m5s+d+NH2p8f3acZ275Nbw58606skeUAaDPETkA1j/KxRHJVWRPgHABNJKBViJ1kM4N4PDLTaqHA8gDg7nFsiuJE9N4bdVi9q1rmj40bYHkCz3jG7UXllSkAmZMOJBxR5VEFjSMpPBi0q9bUjH0kooVVSSYeJPSOPUSu/RsfyLXBE33QoJT1njlSs4Ff7KRemxxfL7rS+wf/snRJoCCP9nVPgF2FIi8Tk4jUwAAAABJRU5ErkJggg==";
+    }
+    if (+currentHour >= 0 && +currentHour < 12 && localStorage.getItem("mint") === "true") {
+        timeIcon.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABMUlEQVR4nM2V3UrDQBCFc9VeqrTkwp8XEX2h1voMvpOg16bQtPUngm9ivf9k4CyMZTfuRoQeCCSzM+fMJrMnVVUAYA2sqv8CwuEKAMfAApgm1pdAk1ibqvaoT+BGTX4AdUFjtWoM877EiUvcFgg8u8YmOd28AK2ex8CtJuhL11q7HSmnVU32roPYGfBOGp3lFJE68vEv5AFvYSelAvZacjEfIrBR8SVwFSH18baPyGY7YOniO8WM5Doi4OOfSb69QBMRyEFKIHooQ6KNYi7KDVDH3uPcrV38WIHZ0DHtHMmDiO16dPHXQWPqDlpHGkZ+Wkpaq/BJzyPZwkoffqf7mbOKJssq9lxxU9DUNsvs3Lv9i10v+hLvgPsUOT3/ZFm92ctJbmMxEgyDCQ5BIPlPTuEbJEkpd7mjcnoAAAAASUVORK5CYII=";
+    }
+    if (+currentHour >= 0 && +currentHour < 12 && localStorage.getItem("bubblegum") === "true") {
+        timeIcon.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABkUlEQVR4nNVVS07DMBDNCpaAQCz4XATBvheIkjfpZ18oZ+BOSLCGSlA+pUiwQIXYFHECyr7oRXXlljp1ipBgpJHiycy8Z49nHAQFRIu0lMhF8FuiRQbUvwuga7VlFceNJ2DNAdDUwPm0f4xhbBqGS06AFDjIWAIPL+Xyui8x+jKGsa8i+07H90pl1Thq4NoXQIvcGGLMMZONErlVwCXX3VJpUYkcZjcI+KTym7t9DMMF+tCXMUV2nclbtbqpgXtT3ElVQIc+wTxC5nnJRyAid2YnhWR4LAMfzS2sS7TIVRYcRTspsPstqWU39XIlalqBTcvep41J0iTZmwQYswMfznxjBquJDID2UReAoymNY8sXYK4ByLa3k3STZMv8e46i7Ykd1AsDZA0GdKw7f8LEVCVyatnbc11TCpvIBpnSaO1eHG8USpqNCqCtgTOuyY5jgec8LHw/+wbqhjmL6TUq7KnIPvAlxcHoNexGZ/uDca3iuJHH5EgDx67kOudNJnOOl57Iii+xf/gmB7MBnG+yS74A2jPzuTvmebQAAAAASUVORK5CYII=";
+    }
+    if (+currentHour >= 12 &&  +currentHour < 17 && localStorage.getItem("mulberry") === "true") {
+        timeIcon.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABrUlEQVR4nO1WQVLCQBAMHjzDVX9ieZWD4HcETqliRtGv+ATKzFBEX+Ab8AHqxVNbO4spQoBkJSk80FV7yOxspne2Z3aj6IgAQPkVwml0KEAZbjQbJI5PoOM+0kmnMCecQmhesKeTDoR7bu3+BHTct50KvUHjdqm/BXe+bg339ieQrvxwdndV6p9QN4RwNRIat11wAC37nvENhBVKXzaExGXK5oCW+dYVfB0Quv8VX3EQR00Cbuc+2DeEbjGNz2wID8xmcz4TzRAQl3YT16AwpzRckkvqazJqwbJGA+FPs03js4K/y4QX30dme4pPofwIoffghgVX4/6H80oEnvm8QEDpIdPHhn4RDJjaTWzDwpzyaP0IoLwwW0IXewfPNSUTHA0t7X7no0yEK80nI6B0GdUFKPHWMhSmnK/wZHvJ5tal5Y0ooW7WiHwmEtOE10Wyqe2aCD2JxW4CO/SBwFZcOxB4GTVzHSfj603BNz1IcrVf5fyraCDkQZKr/coE/tgjoPSyvrj22g9FI7UfglztH+LBitXaXx5PqTCbJooyYdZxUe3CUZj4j8I8ItqCH+KDzKkAl9u/AAAAAElFTkSuQmCC";
+    }
+    if (+currentHour >= 12 &&  +currentHour < 17 && localStorage.getItem("mint") === "true") {
+        timeIcon.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABXElEQVR4nO2WQU7DMBBFXRasm224CWJLF6Rch7ZrKgqHKpUSOAFnKAegbLp6aMggucZR7WADizwpUjszyXw7MxMbMxAB8Aw05q9AyZ3kBJgChcfXALXHXgCV3JtCwFQX+gKMA+ILjRWqFAIK64GXAfGTGMGhIsaSHBjp/2tgA7zr9Sg7pb6RxqZJ7gLc0c3S5IR25cIeuAFKvWZq42sncgnYaJKZxzdX3zrlkMEeNMDu0wKlJ152QnizbKfAA/AaPbBoexy7z48IOPMIuFfbwXN6Q1vtwtzjW7ivANiq7fzHyZ2htNd3XurKF1YRVh4BFyYVwJJubp3YFWE0IYNoYg0i2Ym11sROf38bu1qEK2snuqiTjeLkEPkxyvU5vvIl9x1InN4Ppd+hBsWx2b0fSr8ZATy5Nyfv/Viy9H4MTu///oGVw96vAwszr1COF2adW8B2KEz+W2EOmA4+AIIYfW0sxx8BAAAAAElFTkSuQmCC";
+    }
+    if (+currentHour >= 12 &&  +currentHour < 17 && localStorage.getItem("bubblegum") === "true") {
+        timeIcon.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO1Wy04CMRStLlzjVv/EuNWFwpIw55IwfyGwmoXGx0cJCegXyLatmOgHiBtXNXfskKEZYCoddcFJbgLtnd7TzrlnKsQWHlBEj5poLP4KmshwVFrEJMmuJKpPifYLCIw1MHLHOfc5is752Y0JSKJ6ulPgScdxbV0+F09ziQyT2JjANLegjKKTdfmq3T71IVwKOo5rXNwIscP/JdBQwFABHzYGfFI8xzmcG6y4CwVcZ+JzQxFdiSohgYYt9qmILqZRdMChiLo8lr4mexKVQAFDu9OuO6eBnp27D2kyJm80mmjGY7xrN5/HrPjes7FJs7mngTsFvHkbluYe/15wVIbAS6dz6BLQRLdzjRT4hTcUMLCL9QoI991XoIheUz9otY5ECMjMlFhwQI9Pwu68n4kwbz4ZAQkcByHA4FZb1oYauBQ5KKKbpbmLsVofOo5r7HBzIyKq81FbTcz4d5HtsgiZRHYSK4iPgllxcEjPj1FwmCTZ1cBZUfGiC4nT+yaIBnwuJAu9XzZ+6hEKeHAfDt77vqik933g9P7vX1gn+d63r6eEMKslqtcJM8SHahW2wlT/UZhbiCX4AhRWJcchFGSoAAAAAElFTkSuQmCC";
+    }
+    if (+currentHour >= 17 &&  +currentHour <= 23 && localStorage.getItem("mulberry") === "true") {
+        timeIcon.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABfUlEQVR4nO3Vu0oDURAG4KCCIFpYesNOfAxLLbQQ8QW0UhEErRd2JopYBe0UrLRIp0IENTMJ+g5iYeGtFiNYSJJfzkrQYDbZjXuWFBmYcvl2fs45k0i0q9UKF84grrf64wOveAhKR1C6hzpd8aDZ5DyEClAGhHfiQdVdg1DZQ72mybgmLf+gDBO5XTTPAxB+rUJNZ1LddmHh4z+o6ZvtPrtXRuizJny5OWYPVt6oido+XBDK+MJCu/ZgpQd/mB+RTnfagYU+/KP2pl6wBRfqwkrPVk43lO7qw97Umcgjh/B5Q/h78hQcpyM6WHklGOz1SWSxI08jUCqGwF+gvBhJ9FA+CAFXrtoTlPeQ4ylochzq9OLU6UGWRpHjaShNBFv8DU93qH4ziyfY1N6fh4rc7waUoe5cuMiFVyFcah7lEoSXQqGVQtadaSp2s8+z7mwiglW5Hyx6KkLo0NyOf6G/C+oMQ2jZe7mEbiH87r3tZnkIn0Fp3fxk1UftaoX6AjkTIQsmyL2eAAAAAElFTkSuQmCC";
+    }
+    if (+currentHour >= 17 &&  +currentHour <= 23 && localStorage.getItem("mint")=== "true") {
+        timeIcon.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGklEQVR4nO3VTytEURzG8QmlxMKSITt5GZZmwULyBlghpXgVVmJHWbGXGi9FFhb+rWWUhZiPTkZM3Jl7zT23Wcx3fU7fc55+5zylUo9uA+MYLVJYxgmuMVCUdBk1n+wWJd1C3TdzRd20rplybOkYHv1mMLb41N+MxH4yrwni6ZjinQRp3OFCtYV4P6b4poX4Fv2xxC9asxJLXGsjvo8y3bjSnmrukeNCOvbQl6d4Q3rOcosdk3jLIH/Aai7R40h27nCACmYwjCFMYR6zaYu/3XRn4SkUT9pbVzJGnkSo1qWskW/ivQNp2LuWSfoFFv4Ze+jzxVIOVXmYMvqw5ji8jo6kP8EE1hs/1yWeG397KI9zbIdDNm3q0Q18AGTq331UfcmSAAAAAElFTkSuQmCC";
+    }
+    if (+currentHour >= 17 &&  +currentHour <= 23 && localStorage.getItem("bubblegum") === "true") {
+        timeIcon.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABjElEQVR4nO3Vv0oDQRAG8EMFQbSw9B924lvEMhZaiDH3fQspoqRQEQSt8wBWop2ClfYixNKXEILKzSbR1KKChWhOVhMMklwu8TZYZGC6O347c3szjtOL/xZF1x0vkqNdA0up1IQAp0J6V7HYQFdQcd0VDTxr0tfAXldQTW4LWflCTbpuvCuVSj1K+qblVtGCUmMCPNajJm/j8UGrsJBnv1GT+XR6xOovo4G3RrCXTM5YgwXYbYRav1wC5JrC5IE1WAPFALjkJxL9VmAhXwNgv0CuWoF1bUo1SQEerNxuTd4EwVU8F3nLhbxsBVfn9r6fzfZFBnvAZij4Gz+PrO13yeSUkO9hcSHLHrAWSesFOA5d9U/19wIcanJeA7PXicRwOZMZEnLaAxa0UnMtYbOFWt3uNg/1ZBZPqKrNydtpecCnqHhKLbfXcnJLgI+OUfMusN4WWgtRarGTtlf3+ZLz51VJHoVpvXlGgBPzdzhRxa1SkwVyw0wuIfOafKnO9pIGLoTcMYeMDOyFE1F8AgWUb6nSfKHUAAAAAElFTkSuQmCC";
+    } 
+    
+    timeIcon.style.transition = "all .1s ease";
+
+    
+}, 1000)
+    
+
+
 // Makes sure that the color theme picked by user persists after refresh
 if (localStorage.getItem("mulberry") === "true") {
     mode("mulberry", "mint", "bubblegum");
@@ -664,6 +669,7 @@ if (localStorage.getItem("mulberry") === "true") {
 } else if (localStorage.getItem("bubblegum") === "true") {
     mode("bubblegum", "mint", "mulberry");
 }
+
 
 // If mulberry button is clicked (burgundy), change to mulberry mode
 // remove other modes
