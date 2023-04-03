@@ -90,6 +90,8 @@ var minTemp = document.getElementById("min");
 var maxTemp = document.getElementById("max");
 var sunrise = document.getElementById("sunrise");
 var sunset = document.getElementById("sunset");
+var sunriseTime = document.getElementById("sunrise-time");
+var sunsetTime = document.getElementById("sunset-time");
 
 // RIGHT DASHBOARD OF CURRENT WEATHER CONDITIONS
 var feelsLike = document.getElementById("feels-like-degrees");
@@ -190,8 +192,10 @@ function lastElement() {
 
 // Deletes history and removes all elements in the search container
 cancel.addEventListener("click", function() {
+    historyObj = {city: []}
     localStorage.removeItem("history");
     searchContainer.innerHTML = '';
+    
 })
 
 
@@ -233,26 +237,27 @@ function currentWeather() {
         // Pass in fetchWeather function to get specific location of user
         .then(function(data) {
             fetchWeather(data.city);
+            console.log(data);
         })
 }
 
 currentWeather();
 
-// function changeTimeZone(date, timeZone) {
-//     if (typeof date === 'string') {
-//       return new Date(
-//         new Date(date).toLocaleString('en-US', {
-//           timeZone,
-//         }),
-//       );
-//     }
-//     return new Date(
-//         date.toLocaleString('en-US', {
-//           timeZone,
-//         }),
-//     );
+function changeTimeZone(date, timeZone) {
+    if (typeof date === 'string') {
+      return new Date(
+        new Date(date).toLocaleString('en-US', {
+          timeZone,
+        }),
+      );
+    }
+    return new Date(
+        date.toLocaleString('en-US', {
+          timeZone,
+        }),
+    );
     
-// }
+}
 
 var apiKey = config.WEATHER_API_TOKEN;
 
@@ -283,6 +288,7 @@ function fetchWeather(city) {
             if (data.name === undefined || data.name === null) {
                 undefinedInput();
             } else {
+                console.log(data);
                 document.getElementById("undefined").style.visibility = "hidden";
                 cityChose.innerText = data.name;
                 currentTemp.innerText = Math.round(data.main.temp);
@@ -313,6 +319,31 @@ function fetchWeather(city) {
 
             }
 
+
+            // API gets the sunrise and sunset times in the location's local time
+            // (The times are a little inaccurate ngl)
+            var sunURL = "https://api.sunrise-sunset.org/json?lat="+ data.coord.lat + "&lng=" + data.coord.lon + "&date=today";
+            
+            fetch(sunURL)
+                .then(response => response.json())
+                .then(data => {
+                    if(data.results.sunset.length === 10) {
+                        sunset.innerText = data.results.sunset.substring(0, 4);
+                    } 
+                    if (data.results.sunrise.length === 10) {
+                        sunrise.innerText = data.results.sunrise.substring(0, 4);
+                    } 
+                    if (data.results.sunrise.length === 11) {
+                        sunrise.innerText = data.results.sunrise.substring(0, 5);
+                    } 
+                    if (data.results.sunset.length === 11) {
+                        sunset.innerText = data.results.sunset.substring(0, 5);
+                    }
+                    
+                    sunsetTime.innerText = data.results.sunset.slice(-2);
+                    sunriseTime.innerText = data.results.sunrise.slice(-2);
+                })
+
             // sunrise.innerText = changeTimeZone(new Date(data.sys.sunrise * 1000), timezone);
             // sunrise.innerText = changeTimeZone(new Date(data.sys.sunset * 1000), timezone);
 
@@ -324,15 +355,18 @@ function fetchWeather(city) {
                 .then(function(five) {
                     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
                     
-                    var i = 1;
+                    
                 
-
-                    while (i < 6) {
-                        var date = dayjs();
-                        fiveWeek[i - 1].innerHTML = weekday[(date.day() + 7 + i) % 7];                   
-                        
-                        i++;
-                    }
+                    setInterval(function() {
+                        var i = 1;
+                        while (i < 6) {
+                            var date = dayjs();
+                            fiveWeek[i - 1].innerHTML = weekday[(date.day() + 7 + i) % 7];                   
+                            
+                            i++;
+                        }
+                    }, 1000)
+                   
                     
                     var x = 1;
                     while (x < 5) {
