@@ -344,9 +344,6 @@ function fetchWeather(city) {
                     sunriseTime.innerText = data.results.sunrise.slice(-2);
                 })
 
-            // sunrise.innerText = changeTimeZone(new Date(data.sys.sunrise * 1000), timezone);
-            // sunrise.innerText = changeTimeZone(new Date(data.sys.sunset * 1000), timezone);
-
             // Create a nested fetch to get the five day forecast            
             var fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + data.coord.lat+ "&lon=" + data.coord.lon + "&units=imperial&appid=" + apiKey;
 
@@ -495,6 +492,8 @@ var speedIcon = document.getElementById("speed-icon");
 var fiveIcon = document.getElementById("five-icon");
 var greeting = document.getElementById("greeting");
 
+var weekWeather = document.querySelector(".week-weather");
+
 
 const searchOption = document.getElementById("#search-container div");
 
@@ -592,6 +591,14 @@ function mode(firstMode, secondMode, thirdMode) {
     inputSelect.classList.add(firstMode + "-place");
     inputSelect.classList.remove(secondMode + "-place");
     inputSelect.classList.remove(thirdMode + "-place");
+
+    weekWeather.classList.add(firstMode + "-thumb");
+    weekWeather.classList.remove(secondMode + "-thumb");
+    weekWeather.classList.remove(thirdMode + "-thumb");
+
+    weekWeather.classList.add(firstMode + "-track");
+    weekWeather.classList.remove(secondMode + "-track");
+    weekWeather.classList.remove(thirdMode + "-track");
 
     largeDash.classList.add(firstMode + "-gradient");
     largeDash.classList.remove(secondMode + "-gradient");

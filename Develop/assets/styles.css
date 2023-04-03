@@ -13,6 +13,10 @@
     padding: 0;
 }
 
+/* html {
+    /* overflow-x: hidden; */
+
+
 body {
     font-family: "Inter", sans-serif;
     overflow-x: hidden;
@@ -50,6 +54,7 @@ h5 {
     font-size: 32px;
     font-weight: 300;
     color: white;
+    text-align: center;
 }
 
 #current-time {
@@ -67,7 +72,7 @@ h5 {
 
 .greeting h5 {
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 200;
     color: white;
 }
@@ -118,6 +123,7 @@ h5 {
     background-color: var(--mint-background);
     font-weight: 200;
     letter-spacing: -1px;
+    font-size: 13.5px;
     color: var(--mint-text);
 }
 
@@ -466,6 +472,8 @@ h5 {
     cursor: pointer
 }
 
+/* ------------FOR COLOR THEME CHANGE--------------- */
+
 .mulberry-background {
     background-color: #8C3B3B;
     transition: all .4s ease;
@@ -572,4 +580,423 @@ h5 {
     color: #FF7B7B;
     opacity: .6;
     transition: all .4s ease;
+}
+
+.mulberry-thumb::-webkit-scrollbar-thumb {
+    background-color: #622121;
+    transition: all .4s ease;
+}
+
+.mint-thumb::-webkit-scrollbar-thumb {
+    background-color: var(--mint-icon);
+    transition: all .4s ease;
+}
+
+.bubblegum-thumb::-webkit-scrollbar-thumb {
+    background-color: #FF7B7B;
+    transition: all .4s ease;
+}
+.mulberry-track::-webkit-scrollbar-track {
+    background-color: #8C3B3B;
+    transition: all .4s ease;
+}
+
+.mint-track::-webkit-scrollbar-track {
+    background-color: var(--mint-text);
+    transition: all .4s ease;
+}
+
+.bubblegum-track::-webkit-scrollbar-track {
+    background-color: #FFCCCC;
+    transition: all .4s ease;
+}
+
+
+/* --------------MEDIA QUERIES------------------ */
+@media screen and (max-width: 700px) {
+    
+    h5 {
+        font-size: 11px;
+    }
+
+    .dashboard-container {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        padding: 50px 50px;
+    }
+
+
+    /* ---------SIDE BAR WITH SEARCH AND TIME------------ */
+    .main-dashboard {
+        margin-left: 0;
+    }
+
+    .search-with-time {
+        margin-top: 2em;
+    }
+
+    .search-container {
+        height: 10em;
+    }
+
+    .search-option {
+        width: 75%;
+    }
+
+    .search-btn {
+        margin-left: 92%;
+        right: 0;
+    }
+
+    /* ----------TOP RIGHT DASHBOARD WITH TODAY WEATHER----------- */
+
+    .today-weather {
+        width: 100%;
+        display: flex;
+        justify-content: left;
+        flex-direction: column;
+        margin: 15px 0;
+       
+    }
+
+    /* ---------------TODAY LEFT SECTION------------------- */
+    .major-left-weather {
+        width: 100%;
+        height: 17em;
+        margin-top: 35px;
+    }
+
+    .minor-right-weather {
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: -20px;
+    }
+
+    .today-date h5 {
+        font-size: 12px;
+    }
+
+    .city-and-weather p {
+        font-size: 18px;
+    }
+
+    .current-weather p {
+        font-size: 11px;
+    }
+
+
+    /* ---------------TODAY RIGHT SECTION------------------- */
+
+    .feels-like, .humidity {
+        width: calc((100% / 2) - 4px);
+        height: 6em;
+        border-radius: 15px;
+    }
+
+    .wind-speed {
+        border-radius: 15px;
+        width: 100%;
+        margin-top: 3px; 
+    }
+
+    /* ----------BOTTOM RIGHT DASHBOARD WITH 5-DAY WEATHER----------- */
+    .week-weather {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+    .week-weather::-webkit-scrollbar {
+        height: 10px;
+        
+    }
+
+    .week-weather::-webkit-scrollbar-track {
+        border-radius: 5px;
+    }
+
+    .week-weather::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+    }
+
+    .week-slide {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 40px;
+        margin-bottom: 10px;
+    }
+
+
+    .five-humidity-wind-speed {
+        width: 10rem;
+        gap: 20px;
+    }
+
+    .forecast-buttons {
+        visibility: hidden;
+    }    
+}
+
+@media screen and (min-width: 701px) and (max-width: 860px) {
+    
+    h5 {
+        font-size: 11px;
+    }
+
+    .dashboard-container {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        
+    }
+
+    /* ---------SIDE BAR WITH SEARCH AND TIME------------ */
+    .search-with-time {
+        margin-top: 2em;
+    }
+    .main-dashboard {
+        margin-left: 0;
+    }
+
+    .search-container {
+        height: 10em;
+    }
+
+    .search-option {
+        width: 75%;
+    }
+
+    .search-btn {
+        margin-left: 95%;
+        right: 0;
+    }
+
+    /* ----------TOP RIGHT DASHBOARD WITH TODAY WEATHER----------- */
+
+    .today-weather {
+        width: 100%;
+        display: flex;
+        justify-content: left;
+        flex-direction: column;
+        margin: 15px 0;
+       
+    }
+
+    /* ---------------TODAY LEFT SECTION------------------- */
+    .major-left-weather {
+        width: 100%;
+        height: 17em;
+        margin-top: 35px;
+    }
+
+    .minor-right-weather {
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: -20px;
+    }
+
+    .today-date h5 {
+        font-size: 12px;
+    }
+
+    .city-and-weather p {
+        font-size: 18px;
+    }
+
+    .current-weather p {
+        font-size: 11px;
+    }
+
+
+    /* ---------------TODAY RIGHT SECTION------------------- */
+
+    .feels-like, .humidity {
+        width: calc((100% / 2) - 4px);
+        height: 6em;
+        border-radius: 15px;
+    }
+
+    .wind-speed {
+        border-radius: 15px;
+        width: 100%;
+        margin-top: 3px; 
+    }
+
+    /* ----------BOTTOM RIGHT DASHBOARD WITH 5-DAY WEATHER----------- */
+    .week-weather {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+    .week-weather::-webkit-scrollbar {
+        height: 10px;
+        
+    }
+
+    .week-weather::-webkit-scrollbar-track {
+        border-radius: 5px;
+    }
+
+    .week-weather::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+    }
+
+    .week-slide {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 40px;
+        margin-bottom: 10px;
+    }
+
+
+    .five-humidity-wind-speed {
+        width: 10rem;
+        gap: 20px;
+    }
+
+    .forecast-buttons {
+        visibility: hidden;
+    }
+    
+}
+
+
+@media screen and (min-width: 861px) and (max-width: 1450px) {
+    
+    h5 {
+        font-size: 11px;
+    }
+
+    .dashboard-container {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+    }
+
+    /* ---------SIDE BAR WITH SEARCH AND TIME------------ */
+    .search-with-time {
+        margin-top: 2em;
+    }
+    .main-dashboard {
+        margin-left: 0;
+    }
+
+    .search-container {
+        height: 15em;
+    }
+
+    .search-option {
+        width: 75%;
+    }
+
+    .search-btn {
+        margin-left: 77%;
+        right: 0;
+    }
+
+    .search-input {
+        width: 100%;
+        text-align: center;
+    }
+
+    .search-input input {
+        width: 60%;
+    }
+
+    /* ----------TOP RIGHT DASHBOARD WITH TODAY WEATHER----------- */
+
+    .today-weather {
+        width: 100%;
+        display: flex;
+        justify-content: left;
+        flex-direction: row;
+        margin: 40px 0;
+        gap: 20px;
+    }
+
+    /* ---------------TODAY LEFT SECTION------------------- */
+    .major-left-weather {
+        width: 80%;
+        height: 20em;
+    }
+
+    .minor-right-weather {
+        width: 20%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    .today-date h5 {
+        font-size: 14px;
+    }
+
+    .city-and-weather p {
+        font-size: 21px;
+    }
+
+    .current-weather p {
+        font-size: 11px;
+    }
+
+
+    /* ---------------TODAY RIGHT SECTION------------------- */
+
+    .feels-like, .humidity, .wind-speed {
+        width: 100%;
+        height: calc(100% / 3 - 15px);
+        border-radius: 15px;
+    }
+
+    .right-entry h3 {
+        font-size: 22px;
+    }
+
+    /* ----------BOTTOM RIGHT DASHBOARD WITH 5-DAY WEATHER----------- */
+    .week-weather {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+    .week-weather::-webkit-scrollbar {
+        height: 10px;
+        
+    }
+
+    .week-weather::-webkit-scrollbar-track {
+        border-radius: 5px;
+    }
+
+    .week-weather::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+    }
+
+    .week-slide {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 40px;
+        margin-bottom: 10px;
+    }
+
+
+    .five-humidity-wind-speed {
+        width: 10rem;
+        gap: 20px;
+    }
+
+    .forecast-buttons {
+        visibility: hidden;
+    }
+
+
+    
 }
