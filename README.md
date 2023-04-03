@@ -24,6 +24,8 @@ https://jmaduafo.github.io/Weather-Dashboard/Develop/
 
 [Weather Dashboard Screen Recording.webm](https://user-images.githubusercontent.com/87540591/229628663-ad488de6-b205-4772-91c9-1f7e8fe5afca.webm)
 
+[Weather Dasboard 2.webm](https://user-images.githubusercontent.com/87540591/229647821-fcf17b00-c6dc-43a7-ae34-2191bf84ae90.webm)
+
 ## Features
 
 Features include:
