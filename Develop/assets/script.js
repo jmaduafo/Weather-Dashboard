@@ -240,7 +240,7 @@ function currentWeather() {
 currentWeather();
 
 
-var apiKey = config.WEATHER_API_TOKEN;
+var apiKey = "fc1cecfce950939c0c23f9e6811123bf";
 
 var fiveWeek = document.querySelectorAll(".five-day-week");
 var minimumTemp = document.querySelectorAll(".minimum");
