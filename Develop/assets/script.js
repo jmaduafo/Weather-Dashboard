@@ -146,11 +146,7 @@ function onLoad() {
         // the selected name on the dashboard
         div.addEventListener("click", function() {
             fetchWeather(this.firstChild.innerHTML);
-        })
-
-
-       
-             
+        })           
     })
     
 
@@ -243,21 +239,6 @@ function currentWeather() {
 
 currentWeather();
 
-function changeTimeZone(date, timeZone) {
-    if (typeof date === 'string') {
-      return new Date(
-        new Date(date).toLocaleString('en-US', {
-          timeZone,
-        }),
-      );
-    }
-    return new Date(
-        date.toLocaleString('en-US', {
-          timeZone,
-        }),
-    );
-    
-}
 
 var apiKey = config.WEATHER_API_TOKEN;
 
@@ -657,7 +638,7 @@ setInterval(function() {
     timeIcon.style.transition = "all .1s ease";
 
     
-}, 1000)
+}, 300)
     
 
 
