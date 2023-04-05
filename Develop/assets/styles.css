@@ -205,14 +205,16 @@ h5 {
     visibility: hidden;
 }
 
-#cancel {
+.cancel {
     margin-bottom: -10px;
     width: 10%;
+    color: var(--mint-text);
 }
 
-#cancel:hover {
+.cancel:hover {
     cursor: pointer;
 }
+
 
 /* ----------TOP RIGHT DASHBOARD WITH TODAY WEATHER----------- */
 
@@ -398,6 +400,21 @@ h5 {
     gap: 40px;
 }
 
+.week-weather::-webkit-scrollbar {
+    height: 10px;
+    
+}
+
+.week-weather::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: var(--mint-text);
+}
+
+.week-weather::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: var(--mint-icon);
+}
+
 .five-day {
     background-color: var(--mint-background);
     padding: 30px;
@@ -471,6 +488,8 @@ h5 {
 .btn:hover {
     cursor: pointer
 }
+
+
 
 /* ------------FOR COLOR THEME CHANGE--------------- */
 
@@ -1120,7 +1139,6 @@ h5 {
 
     .week-weather::-webkit-scrollbar {
         height: 10px;
-        
     }
 
     .week-weather::-webkit-scrollbar-track {

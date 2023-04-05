@@ -100,7 +100,7 @@ var speed = document.getElementById("speed-miles");
 
 var searchContainer = document.querySelector(".search-container");
 
-var cancel = document.getElementById("cancel");
+var cancel = document.querySelector(".cancel");
 
 // Initializes list to add to localstorage
 var historyObj = { city: [] };
